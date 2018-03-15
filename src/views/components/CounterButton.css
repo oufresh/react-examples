@@ -1,0 +1,32 @@
+.counter-button
+{
+    background-color: lightgray;
+    border: none;
+    border-radius: 3px;
+    box-shadow: none;
+    margin: none;
+    width: 120px;
+    height: 54px;
+    color: black;
+    transition-property: transform;
+    transition-duration: 200ms;
+    margin: 20px;
+}
+
+.counter-button:hover
+{
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+
+.counter-button:active,
+.counter-button:focus,
+.counter-button:active:focus,
+{
+    outline: none;
+}
+
+.counter-button:active
+{
+    transform: scale(0.98);
+}
