@@ -1,15 +1,40 @@
-import { MiddlewareAPI, Middleware, Dispatch, Store } from 'redux';
-import { StoreState } from '../../store';
-import { Action } from '../../modules/value/types';
+import { Middleware, MiddlewareAPI, Dispatch, Action } from 'redux';
 
-export function logger() {
-    const _logM: Middleware = ({ getState }: MiddlewareAPI) => 
-    (next: Dispatch) => (action: Action) => {
-        console.log('dispatching', action);
+/**
+ * function loggerMiddleware<S>(api: MiddlewareAPI<S>) ...
+ * 
+ * export interface Middleware {
+ *  <S>(api: MiddlewareAPI<S>): (next: Dispatch<S>) => Dispatch<S>;
+ * }
+ *
+ * export function applyMiddleware(...middlewares: Middleware[]): GenericStoreEnhancer;
+ */
+
+export const logger: Middleware = <S>({ getState }: MiddlewareAPI<S>) => 
+    (next: Dispatch<S>) => <A extends Action>(action: A) => {
+        console.log('LOGGER: dispatching -> ', action);
         let result = next(action);
-        console.log('next state', getState());
+        console.log('LOGGER: next state -> ', getState());
         return result;
     };
 
-    return _logM;
-} 
+    /***
+     * Using a string type of project store
+     * 
+     * import { Middleware, MiddlewareAPI, Dispatch, Action } from "redux";
+     * export interface ExtendedMiddleware<StateType> extends Middleware {
+     *<S extends StateType>(api: MiddlewareAPI<S>): (next: Dispatch<S>) => Dispatch<S>;
+     *}
+     *
+     * export const loggerMiddleware: ExtendedMiddleware<YourApplicationReduxStateTypeHere> = 
+     * <S extends YourApplicationReduxStateTypeHere>(api: MiddlewareAPI<S>) =>
+     * (next: Dispatch<S>) =>
+     *   <A extends Action>(action: A): A => {
+     *       console.log("Before");
+     *       const result = next(action);
+     *       console.log("After"); // Can use: api.getState()
+     *       return result;
+     *   };
+     * 
+     * 
+     */
