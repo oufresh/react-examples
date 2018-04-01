@@ -3,7 +3,7 @@ import { connect, Dispatch } from 'react-redux';
 
 import { StoreState } from '../../store';
 
-import { Action } from '../../modules/value/types';
+import { ValueAction } from '../../modules/value/types';
 import { increment, decrement } from '../../modules/value/actions';
 
 import IncreaseButton from '../components/IncreaseButton';
@@ -54,7 +54,7 @@ export const mapStateToProps = ({ value }: StoreState) => {
     };
 };
 
-export const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
+export const mapDispatchToProps = (dispatch: Dispatch<ValueAction>) => {
     return {
         onIncrement: () => dispatch(increment()),
         onDecrement: () => dispatch(decrement())

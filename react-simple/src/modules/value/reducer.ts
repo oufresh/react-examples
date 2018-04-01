@@ -1,7 +1,7 @@
-import { Action, INCREMENT_VALUE, DECREMENT_VALUE } from './types';
+import { ValueAction, INCREMENT_VALUE, DECREMENT_VALUE } from './types';
 import { StoreState } from '../../store';
 
-export const value = (state: StoreState, action: Action): StoreState => {
+export const value = (state: StoreState, action: ValueAction): StoreState => {
     switch (action.type) {
         case INCREMENT_VALUE:
             return { ...state, value: state.value + 1 };
