@@ -22,5 +22,8 @@
     "@types/react-redux": "^5.0.15",
     "react-scripts-ts": "2.14.0",
     "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "redux-devtools-extension": "^2.13.2"
   }
 }
