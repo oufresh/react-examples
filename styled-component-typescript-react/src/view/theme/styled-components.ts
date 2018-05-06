@@ -12,5 +12,6 @@ const {
   ThemeProvider
 } = styledComponents as ThemedStyledComponentsModule<ThemeInterface>;
 
+export { styledComponents };
 export { css, injectGlobal, keyframes, ThemeProvider };
 export default styled;

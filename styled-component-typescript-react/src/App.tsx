@@ -5,6 +5,7 @@ import { theme } from './view/theme';
 
 import Hello from './view/components/Hello';
 import Hello2 from './view/components/Hello2';
+import { FlexTest } from './view/components/FlexTest';
 
 const logo = require('./logo.svg');
 
@@ -22,7 +23,11 @@ class App extends React.Component {
           </article>
         </div>
         <ThemeProvider theme={theme}>
-          <Hello2 name="TypeScript con styled-component e theme" enthusiasmLevel={10} />
+          <React.Fragment>
+            <Hello2 name="TypeScript con styled-component e theme" enthusiasmLevel={10} />
+            <hr/>
+            <FlexTest />
+          </React.Fragment>
         </ThemeProvider>
       </React.Fragment>
     );

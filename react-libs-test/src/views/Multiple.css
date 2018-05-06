@@ -1,0 +1,9 @@
+.first {
+    background-color: azure;
+    border: 1px solid black;
+    width: 100%;
+}
+
+.second {
+    text-align: center;
+}
