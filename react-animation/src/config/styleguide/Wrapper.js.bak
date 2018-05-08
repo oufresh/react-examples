@@ -1,0 +1,7 @@
+import React from 'react';
+import { IntlProvider } from 'react-intl';
+import it from '../../modules/_rest/language/mock/it.json';
+
+const Wrapper = ({children}) => <IntlProvider locale="en" messages={it}>{children}</IntlProvider>;
+
+export default Wrapper;
