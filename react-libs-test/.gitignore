@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+#tools
+/semantic
+
 # production
 /build
 
