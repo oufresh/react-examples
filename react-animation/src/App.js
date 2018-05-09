@@ -1,9 +1,42 @@
 import React from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
+
 import './App.css';
-//import ExampleComponent from './views/basic/Example';
-//import CustomComponent from './views/custom/CustomExample';
-//import { TodoList } from './views/cssTransition/CssTransitionExample';
-import { TextCarousel } from './views/cssTransition/CarouselAnimation';
+import ExampleComponent from './views/basic/Example';
+import CustomComponent from './views/custom/CustomExample';
+import { TodoList } from './views/cssTransition/CssTransitionExample';
+import { TextAnimationEnterElem } from './views/cssTransition/EnterAnimation';
+import { AnimatedMountComponent } from './views/cssTransition/AnimatedMount';
+
+const Home = () => <div />;
+
+const Header = () => (
+  <header>
+    <nav>
+      <ul style={{listStyle: 'none'}}>
+        <li><Link to='/' replace>Home</Link></li>
+        <li><Link to='/example' replace>ExampleComponent</Link></li>
+        <li><Link to='/basic' replace>CustomComponent</Link></li>
+        <li><Link to='/todolist' replace>TodoList</Link></li>
+        <li><Link to='/textenter' replace>TextAnimationEnterElem</Link></li>
+        <li><Link to='/animatedmount' replace>AnimatedMountComponent</Link></li>
+      </ul>
+    </nav>
+  </header>
+);
+
+const Main = () => (
+  <main>
+    <Switch>
+      <Route exact path='/' component={Home}/>
+      <Route path='/example' component={ExampleComponent}/>
+      <Route path='/basic' component={CustomComponent}/>
+      <Route path='/todolist' component={TodoList}/>
+      <Route path='/textenter' render={props => <TextAnimationEnterElem text="prova text" {...props} />}/>
+      <Route path='/animatedmount' component={AnimatedMountComponent}/>
+    </Switch>
+  </main>
+);
 
 class App extends React.Component {
 
@@ -12,14 +45,15 @@ class App extends React.Component {
   }
 
   render() {
-    //const items = ['pippo', 'pluto', 'paperino'];
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">React animation examples</h1>
         </header>
         <main className="App-main">
-          <TextCarousel items={['pippo', 'pluto', 'paperino']}/>
+          <Header />
+          <hr />
+          <Main />
         </main>
       </div>
     );

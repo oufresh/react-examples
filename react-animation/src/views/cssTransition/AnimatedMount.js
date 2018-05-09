@@ -1,52 +1,61 @@
 import React from 'react';
+import ReactTransitionGroup from 'react-addons-transition-group';
 
 export const AnimatedMount = ({ unmountedStyle, mountedStyle }) => {
-    return (Wrapped) => class extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          style: unmountedStyle,
-        };
-      }
-  
-      componentWillEnter(callback) {
-        this.onTransitionEnd = callback;
-        setTimeout(() => {
-          this.setState({
-            style: mountedStyle,
-          });
-        }, 20);
-      }
-  
-      componentWillLeave(callback) {
-        this.onTransitionEnd = callback;
+  return (Wrapped) => class extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        style: unmountedStyle,
+      };
+    }
+
+    componentWillAppear(callback)
+    {
+      console.log('componentWillAppear');
+      this.onTransitionEnd = callback;
+      setTimeout(() => {
         this.setState({
-          style: unmountedStyle,
+          style: mountedStyle,
         });
-      }
-  
-      render() {
-        return <div
-          style={this.state.style}
-          onTransitionEnd={this.onTransitionEnd}
-        >
-          <Wrapped { ...this.props } />
-        </div>;
-      }
-    };
+      }, 20);
+    }
+
+    componentWillEnter(callback) {
+      console.log('componentWillEnter');
+      this.onTransitionEnd = callback;
+      setTimeout(() => {
+        this.setState({
+          style: mountedStyle,
+        });
+      }, 20);
+    }
+
+    componentWillLeave(callback) {
+      this.onTransitionEnd = callback;
+      this.setState({
+        style: unmountedStyle,
+      });
+    }
+
+    render() {
+      return <div
+        style={this.state.style}
+        onTransitionEnd={this.onTransitionEnd}
+      >
+        <Wrapped { ...this.props } />
+      </div>;
+    }
   };
-  /*
-  import React, { PureComponent } from 'react';
+};
 
-class Thing extends PureComponent {
-  render() {
-    return <div>
-      Test!
-    </div>
-  }
-}
+const Thing = () => {
+  return <div>
+    Test!
+  </div>;
+};
 
-export default AnimatedMount({
+const AnimatedMountComponentH =  AnimatedMount({
   unmountedStyle: {
     opacity: 0,
     transform: 'translate3d(-100px, 0, 0)',
@@ -59,9 +68,12 @@ export default AnimatedMount({
   },
 })(Thing);
 
-return <div>
-  <ReactTransitionGroup>
-    <Thing />
-  </ReactTransitionGroup>
-</div>
-*/
+function FirstChild(props) {
+  const childrenArray = React.Children.toArray(props.children);
+  return childrenArray[0] || null;
+}
+
+export const AnimatedMountComponent = () => 
+  <ReactTransitionGroup component={FirstChild}>
+    <AnimatedMountComponentH />
+  </ReactTransitionGroup>;
