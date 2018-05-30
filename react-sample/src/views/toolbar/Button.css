@@ -1,0 +1,19 @@
+.themed-button
+{
+    margin: 0px;
+    border: none;
+    box-shadow: none;
+    border-radius: 3px;
+}
+
+.themed-button.light
+{
+    background-color: lightblue;
+    color: black;
+}
+
+.themed-button.dark
+{
+    background-color: darkblue;
+    color: white;
+}
