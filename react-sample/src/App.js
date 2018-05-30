@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import ThemeContext from './views/theme/ThemeContext';
+import UserContext from './user/UserContext';
 import Toolbar from './views/toolbar/Toolbar';
 import ThemeToggle from './views/themetoggle/ThemeToggle';
 
@@ -40,11 +41,13 @@ class App extends Component {
   render() {
     return (
       <ThemeContext.Provider value={this.state}>
-        <div className="app">
-          <Toolbar />
-          <br />
-          <ThemeToggle />
-        </div>
+        <UserContext.Provider value={"Ciccio"}>
+          <div className="app">
+            <Toolbar />
+            <br />
+            <ThemeToggle />
+          </div>
+        </UserContext.Provider>
       </ThemeContext.Provider>
     );
   }

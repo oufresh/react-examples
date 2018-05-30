@@ -38,3 +38,7 @@ class App extends React.Component {
   }
 }
 ```
+
+## Accessing Context in Lifecycle Methods
+
+Accessing values from context in lifecycle methods is a relatively common use case. Instead of adding context to every lifecycle method, you just need to pass it as a prop, and then work with it just like you’d normally work with a prop.
