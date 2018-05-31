@@ -1,5 +1,5 @@
 import React from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { TransitionGroup } from 'react-transition-group';
 import './CssTransitionExample.css';
 
 /*
@@ -36,14 +36,14 @@ export class TodoList extends React.Component {
       return (
         <div>
           <button onClick={this.handleAdd}>Add Item</button>
-          <CSSTransitionGroup
+          <TransitionGroup
             transitionName="example"
             transitionAppear={true}
             transitionAppearTimeout={500}
             transitionEnterTimeout={500}
             transitionLeaveTimeout={300}>
             {items}
-          </CSSTransitionGroup>
+          </TransitionGroup>
         </div>
       );
     }

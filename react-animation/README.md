@@ -12,6 +12,4 @@ By convention, if the value of ‘example’ is passed in to the transitionName 
 * example-leave : defines the beginning state of the leave transition
 * example-leave.example-leave-active : defines the actual leave transition
 
-
-
 When using ReactCSSTransitionGroup, there’s no way for your components to be notified when a transition has ended or to perform any more complex logic around animation. If you want more fine-grained control, you can use the lower-level ReactTransitionGroup API which provides the hooks you need to do custom transitions

@@ -4,7 +4,6 @@ import './Example.css';
 class AnimComponent extends React.Component {
     
     componentWillReceiveProps(nextProps) {
-        //console.log(nextProps);
         if (nextProps.show !== this.props.show) {
             const elm = this.refs.div;
             if (nextProps.show === true)
