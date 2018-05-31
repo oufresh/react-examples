@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlexTest } from './views/FlexTest';
 import { MClassElem } from './views/Multiple';
-import { Animated } from './views/Animated';
+import ListTest from './views/ListTest';
 import './App.css';
 
 class App extends Component {
@@ -18,9 +18,10 @@ class App extends Component {
       <div className="app">
         <h1 className="app-title">Welcome to React tests</h1>
         <FlexTest />
+		<br />
         <MClassElem className={"text-color"} />
-        <button onClick={this.onClick}>show</button>
-        <Animated visible={this.visible} />
+		<br />
+		<ListTest />
       </div>
     );
   }
