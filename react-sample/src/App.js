@@ -4,6 +4,9 @@ import ThemeContext from './views/theme/ThemeContext';
 import UserContext from './user/UserContext';
 import Toolbar from './views/toolbar/Toolbar';
 import ThemeToggle from './views/themetoggle/ThemeToggle';
+import ThemedList from './views/themedlist/ThemedList';
+
+const names = ['Pippo', 'Pluto', 'Paperino'];
 
 class App extends Component {
   constructor(props, context)
@@ -41,11 +44,13 @@ class App extends Component {
   render() {
     return (
       <ThemeContext.Provider value={this.state}>
-        <UserContext.Provider value={"Ciccio"}>
+        <UserContext.Provider value={'Ciccio'}>
           <div className="app">
             <Toolbar />
             <br />
             <ThemeToggle />
+            <br />
+            <ThemedList elements={names} />
           </div>
         </UserContext.Provider>
       </ThemeContext.Provider>
