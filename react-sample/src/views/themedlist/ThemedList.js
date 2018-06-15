@@ -12,10 +12,10 @@ const List = (props: Props) => {
     return (
         <ul className={'themed-list ' + (props.theme ? props.theme : '')}>
             {
-               // (props.elements ? 
+                (props.elements ? 
                     props.elements.map((el) => {
                         return <li key={el.toString()}>{el}</li>;})
-                //  : null)
+                  : null)
             }
         </ul>
     );
