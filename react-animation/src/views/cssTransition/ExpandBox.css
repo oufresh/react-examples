@@ -1,0 +1,32 @@
+.expand-enter {
+    max-height: 0;
+    overflow:hidden;
+}
+
+.expand-enter.expand-enter-active {
+    max-height: 400px;
+    transition: max-height 1500ms ease-in;
+}
+
+.expand-leave {
+    max-height: 400px;
+}
+
+.expand-leave.expand-leave-active {
+    max-height: 0;
+    transition: max-height 1500ms ease-in;
+    overflow:hidden;
+}
+
+.expand-list {
+    text-align: initial;
+}
+
+.expand-appear {
+    opacity: 0.01;
+}
+
+.expand-appear.expand-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+}

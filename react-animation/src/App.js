@@ -7,6 +7,7 @@ import CustomComponent from './views/custom/CustomExample';
 import { TodoList } from './views/cssTransition/CssTransitionExample';
 import { TextAnimationEnterElem } from './views/cssTransition/EnterAnimation';
 import { AnimatedMountComponent } from './views/cssTransition/AnimatedMount';
+import ExpandBox from './views/cssTransition/ExpandBox';
 
 const Home = () => <div />;
 
@@ -20,6 +21,7 @@ const Header = () => (
         <li><Link to='/todolist' replace>TodoList</Link></li>
         <li><Link to='/textenter' replace>TextAnimationEnterElem</Link></li>
         <li><Link to='/animatedmount' replace>AnimatedMountComponent</Link></li>
+        <li><Link to='/expandbox' replace>ExpandBox</Link></li>
       </ul>
     </nav>
   </header>
@@ -34,6 +36,7 @@ const Main = () => (
       <Route path='/todolist' component={TodoList}/>
       <Route path='/textenter' render={props => <TextAnimationEnterElem text="prova text" {...props} />}/>
       <Route path='/animatedmount' component={AnimatedMountComponent}/>
+      <Route path='/expandbox' component={ExpandBox}/>
     </Switch>
   </main>
 );
