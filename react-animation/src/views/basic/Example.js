@@ -1,16 +1,32 @@
+//@flow
 import React from 'react';
 import './Example.css';
 
-class AnimComponent extends React.Component {
-    
-    componentWillReceiveProps(nextProps) {
-        //console.log(nextProps);
-        if (nextProps.show !== this.props.show) {
+type AnimComponentProps = {
+    show: boolean,
+    rotate: boolean
+};
+
+class AnimComponent extends React.Component<AnimComponentProps> {
+
+    constructor(props:AnimComponentProps) {
+        super(props);
+
+        this.cRef = React.createRef();
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.show !== this.props.show) {
             const elm = this.refs.div;
             if (nextProps.show === true)
                 elm.classList.add('show');
             else
                 elm.classList.remove('show');
+                
         }
         else if (nextProps.rotate !== this.props.rotate)
         {
@@ -25,7 +41,7 @@ class AnimComponent extends React.Component {
     render() {
         return (
             <div className="example-cont">
-                <div ref='div' className="example-component">Ciao!</div>
+                <div ref={this.cRef} className="example-component">Ciao!</div>
             </div>
         );
     }

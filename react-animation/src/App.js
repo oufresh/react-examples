@@ -4,10 +4,11 @@ import { Switch, Route, Link } from 'react-router-dom';
 import './App.css';
 import ExampleComponent from './views/basic/Example';
 import CustomComponent from './views/custom/CustomExample';
-import { TodoList } from './views/cssTransition/CssTransitionExample';
+/*import { TodoList } from './views/cssTransition/CssTransitionExample';
 import { TextAnimationEnterElem } from './views/cssTransition/EnterAnimation';
 import { AnimatedMountComponent } from './views/cssTransition/AnimatedMount';
 import ExpandBox from './views/cssTransition/ExpandBox';
+import { AnimatedMountComponent } from './views/cssTransition/AnimatedMount';*/
 
 const Home = () => <div />;
 
@@ -33,10 +34,10 @@ const Main = () => (
       <Route exact path='/' component={Home}/>
       <Route path='/example' component={ExampleComponent}/>
       <Route path='/basic' component={CustomComponent}/>
-      <Route path='/todolist' component={TodoList}/>
+      {/*<Route path='/todolist' component={TodoList}/>
       <Route path='/textenter' render={props => <TextAnimationEnterElem text="prova text" {...props} />}/>
       <Route path='/animatedmount' component={AnimatedMountComponent}/>
-      <Route path='/expandbox' component={ExpandBox}/>
+<Route path='/expandbox' component={ExpandBox}/>*/}
     </Switch>
   </main>
 );

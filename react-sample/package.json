@@ -1,22 +1,23 @@
 {
-  "name": "react-libs-test",
+  "name": "react-sample",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "eslint-plugin-react": "^7.8.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "react-scripts": "1.1.4",
-    "semantic-ui": "^2.3.1",
-    "react-virtualized": "9.19.1",
-    "styled-components": "^3.3.0"
+    "react-scripts": "1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "flow": "flow"
   },
   "devDependencies": {
-    "flow-bin": "^0.73.0"
+    "eslint-plugin-flowtype": "^2.48.0",
+    "flow-bin": "^0.73.0",
+    "flow-typed": "^2.4.0"
   }
 }
