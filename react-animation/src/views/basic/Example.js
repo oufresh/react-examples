@@ -8,6 +8,7 @@ type AnimComponentProps = {
 };
 
 class AnimComponent extends React.Component<AnimComponentProps> {
+    cRef: any;
 
     constructor(props:AnimComponentProps) {
         super(props);
@@ -21,17 +22,17 @@ class AnimComponent extends React.Component<AnimComponentProps> {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.show !== this.props.show) {
-            const elm = this.refs.div;
-            if (nextProps.show === true)
+            const elm = this.cRef.current;
+            if (this.props.show === true)
                 elm.classList.add('show');
             else
                 elm.classList.remove('show');
                 
         }
-        else if (nextProps.rotate !== this.props.rotate)
+        else if (prevProps.rotate !== this.props.rotate)
         {
-            const elm = this.refs.div;
-            if (nextProps.rotate === true)
+            const elm = this.cRef.current;
+            if (this.props.rotate === true)
                 elm.classList.add('rotate');
             else
                 elm.classList.remove('rotate');
@@ -47,9 +48,11 @@ class AnimComponent extends React.Component<AnimComponentProps> {
     }
 }
 
-class ExampleComponent extends React.Component
+type ExampleComponentProps = any;
+
+class ExampleComponent extends React.Component<ExampleComponentProps>
 {
-    constructor(props) {
+    constructor(props:{}) {
         super(props);
         this.state = {
             show: false,
