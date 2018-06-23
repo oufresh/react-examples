@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
-import { StoreState } from '.';
 import { value } from '../modules/value/reducer';
-import { logger } from '../middlewares/logger/logger';
+import logger from '../middlewares/logger/logger';
+import promise from '../middlewares/promise/promise';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 /**
@@ -17,10 +17,10 @@ const composeEnhancers = (
  (window as StWindow).__REDUX_DEVTOOLS_EXTENSION__ && 
   (window as StWindow).__REDUX_DEVTOOLS_EXTENSION__() || compose);*/
 
-const middlewares = [logger];
+const middlewares = [logger(), promise()];
 
 const initialStore = {
   value: 0
 };
 
-export const store = createStore<StoreState>(value, initialStore, composeWithDevTools(applyMiddleware(...middlewares)));
+export const store = createStore(value, initialStore, composeWithDevTools(applyMiddleware(...middlewares)));

@@ -9,14 +9,19 @@ import { Middleware, MiddlewareAPI, Dispatch, Action } from 'redux';
  *
  * export function applyMiddleware(...middlewares: Middleware[]): GenericStoreEnhancer;
  */
+function logger() {
+    const loggerMiddleware: Middleware = ({ getState }: MiddlewareAPI) => 
+        (next: Dispatch) => <A extends Action>(action: A) => {
+            console.log('LOGGER: dispatching -> ', action);
+            let result = next(action);
+            console.log('LOGGER: next state -> ', getState());
+            return result;
+        };
 
-export const logger: Middleware = <S>({ getState }: MiddlewareAPI<S>) => 
-    (next: Dispatch<S>) => <A extends Action>(action: A) => {
-        console.log('LOGGER: dispatching -> ', action);
-        let result = next(action);
-        console.log('LOGGER: next state -> ', getState());
-        return result;
-    };
+    return loggerMiddleware;
+}
+
+export default logger;
 
     /***
      * Using a string type of project store
