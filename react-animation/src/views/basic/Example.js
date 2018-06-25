@@ -12,12 +12,14 @@ class AnimComponent extends React.Component<AnimComponentProps> {
 
     constructor(props:AnimComponentProps) {
         super(props);
-
         this.cRef = React.createRef();
     }
 
     componentDidMount() {
-
+        if (this.props.show === true) {
+            const elm = this.cRef.current;
+            setTimeout(()=>{elm.classList.add('show')},50);
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -48,14 +50,19 @@ class AnimComponent extends React.Component<AnimComponentProps> {
     }
 }
 
-type ExampleComponentProps = any;
+type ExampleComponentProps = {};
 
-class ExampleComponent extends React.Component<ExampleComponentProps>
+type ExampleComponentState = {
+    show: boolean,
+    rotate: boolean
+};
+
+class ExampleComponent extends React.Component<ExampleComponentProps, ExampleComponentState>
 {
-    constructor(props:{}) {
+    constructor(props) {
         super(props);
         this.state = {
-            show: false,
+            show: true,
             rotate: false
         };
     }
