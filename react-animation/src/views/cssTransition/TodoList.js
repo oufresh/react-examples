@@ -1,6 +1,6 @@
 import React from 'react';
-import { TransitionGroup } from 'react-transition-group';
-import './CssTransitionExample.css';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import './TodoList.css';
 
 /*
 In this component, when a new item is added to ReactCSSTransitionGroup it will get the example-enter CSS class and the example-enter-active CSS class added in the next tick. This is a convention based on the transitionName prop.
@@ -28,20 +28,24 @@ export class TodoList extends React.Component {
   
     render() {
       const items = this.state.items.map((item, i) => (
+        <CSSTransition
+          key={item}
+          timeout={500}
+          classNames="fade"
+        >
         <div key={item} onClick={() => this.handleRemove(i)}>
           {item}
         </div>
+        </CSSTransition>
       ));
   
       return (
         <div>
           <button onClick={this.handleAdd}>Add Item</button>
           <TransitionGroup
-            transitionName="example"
-            transitionAppear={true}
-            transitionAppearTimeout={500}
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={300}>
+            className="example"
+            appear={true}
+            timeout={500}>
             {items}
           </TransitionGroup>
         </div>

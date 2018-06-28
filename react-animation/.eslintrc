@@ -3,7 +3,6 @@
 	"globals": {
 		"jQuery": true,
 		"$": true,
-		 // react-flow
 		 "$Exact":true,
 		 "SyntheticEvent": true
 	},
@@ -35,7 +34,7 @@
 		"eqeqeq": 2,
 		"no-magic-numbers": [2, { "ignore": [-1, 0, 1, 2], "ignoreArrayIndexes": true, "detectObjects": true }],
 		"no-catch-shadow": 2,
-		"no-unused-vars": 1,
+		"no-unused-vars": "off",
 		"comma-dangle": [1, "only-multiline"],
 		"no-mixed-spaces-and-tabs": 1,
 		"no-var": 2,

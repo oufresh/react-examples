@@ -1,6 +1,6 @@
 //@flow
 import React from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './EnterAnimation.css';
 
 function FirstChild(props) {
@@ -8,7 +8,7 @@ function FirstChild(props) {
   return childrenArray[0] || null;
 }
 
-const TextEnterElem = (props) => {
+const TextEnterElem = ({text}:{text:string}) => {
   return (
     <div>
       <CSSTransitionGroup component={FirstChild}
@@ -17,12 +17,16 @@ const TextEnterElem = (props) => {
         transitionAppearTimeout={500}
         transitionEnterTimeout={500}
         transitionLeaveTimeout={500}>
-        <span>{props.text}</span>
+        <span>{text}</span>
       </CSSTransitionGroup>
     </div>
   );
 };
 
-export const TextAnimationEnterElem = (props) => {
+type TextAnimationEnterElemPropsType = {
+  text: string
+};
+
+export const TextAnimationEnterElem = (props:TextAnimationEnterElemPropsType) => {
   return <TextEnterElem text={props.text} />;
 };

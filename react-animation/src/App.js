@@ -5,8 +5,8 @@ import './App.css';
 import ExampleComponent from './views/basic/Example';
 import CustomComponent from './views/custom/CustomExample';
 import Toggle from './views/containers/Toggle';
-/*import { TodoList } from './views/cssTransition/CssTransitionExample';
-import { TextAnimationEnterElem } from './views/cssTransition/EnterAnimation';
+import { TodoList } from './views/cssTransition/TodoList';
+/*import { TextAnimationEnterElem } from './views/cssTransition/EnterAnimation';
 import { AnimatedMountComponent } from './views/cssTransition/AnimatedMount';
 import ExpandBox from './views/cssTransition/ExpandBox';
 import { AnimatedMountComponent } from './views/cssTransition/AnimatedMount';*/
@@ -37,8 +37,8 @@ const Main = () => (
       <Route path='/example' component={ExampleComponent}/>
       <Route path='/basic' component={CustomComponent}/>
       <Route path='/toggle' component={Toggle} />
-      {/*<Route path='/todolist' component={TodoList}/>
-      <Route path='/textenter' render={props => <TextAnimationEnterElem text="prova text" {...props} />}/>
+      <Route path='/todolist' component={TodoList}/>
+      {/*<Route path='/textenter' render={props => <TextAnimationEnterElem text="prova text" {...props} />}/>
       <Route path='/animatedmount' component={AnimatedMountComponent}/>
 <Route path='/expandbox' component={ExpandBox}/>*/}
     </Switch>
