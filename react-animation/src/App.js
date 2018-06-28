@@ -4,6 +4,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import './App.css';
 import ExampleComponent from './views/basic/Example';
 import CustomComponent from './views/custom/CustomExample';
+import Toggle from './views/containers/Toggle';
 /*import { TodoList } from './views/cssTransition/CssTransitionExample';
 import { TextAnimationEnterElem } from './views/cssTransition/EnterAnimation';
 import { AnimatedMountComponent } from './views/cssTransition/AnimatedMount';
@@ -19,6 +20,7 @@ const Header = () => (
         <li><Link to='/' replace>Home</Link></li>
         <li><Link to='/example' replace>ExampleComponent</Link></li>
         <li><Link to='/basic' replace>CustomComponent</Link></li>
+        <li><Link to='/toggle' replace>Toggle switch</Link></li>
         <li><Link to='/todolist' replace>TodoList</Link></li>
         <li><Link to='/textenter' replace>TextAnimationEnterElem</Link></li>
         <li><Link to='/animatedmount' replace>AnimatedMountComponent</Link></li>
@@ -34,6 +36,7 @@ const Main = () => (
       <Route exact path='/' component={Home}/>
       <Route path='/example' component={ExampleComponent}/>
       <Route path='/basic' component={CustomComponent}/>
+      <Route path='/toggle' component={Toggle} />
       {/*<Route path='/todolist' component={TodoList}/>
       <Route path='/textenter' render={props => <TextAnimationEnterElem text="prova text" {...props} />}/>
       <Route path='/animatedmount' component={AnimatedMountComponent}/>
