@@ -15,7 +15,9 @@ const Message = (props: MessagePropsType) => {
         <CSSTransition
             key={props.key}
             timeout={100}
-            classNames={"fading-message"}
+            classNames="fading-message"
+            appear={true}
+            in={true}
         >
         <div key={props.key} className={"fading-message"}>
             <button className={"close"} onClick={()=>{props.onClose(props.key)}}>X</button>

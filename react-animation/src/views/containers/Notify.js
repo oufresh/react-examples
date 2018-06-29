@@ -20,7 +20,8 @@ class Notify extends React.Component<NotifyPropsType, NotifyStateType>
         };
 
         this.setState(prevState => {
-            let messages = prevState.messages.push(message);
+            let messages = prevState.messages;
+            messages.push(message);
             return {
                 messages: messages
             };

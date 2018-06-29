@@ -37,16 +37,13 @@ class Notification extends React.Component<NotificationPropsType, NotificationSt
 
     render()
     {
-        const items = this.state.messages.forEach((v,k) => (
-            <Message key={v.id} text={v.text} title={v.title} onClose={this.onCloseElement} />
-        ));
+        const items = [];
+        this.props.messages.forEach((v,k) => {
+            items.push(<Message key={v.id} text={v.text} title={v.title} onClose={this.onCloseElement} />);
+        });
 
         return (
-            <TransitionGroup
-                className="notification-area"
-                appear={true} >
-                    {items}
-            </TransitionGroup>
+            <div>{items[0]}</div>
         );
     }
 }
