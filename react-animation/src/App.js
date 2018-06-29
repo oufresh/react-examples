@@ -6,6 +6,7 @@ import ExampleComponent from './views/basic/Example';
 import CustomComponent from './views/custom/CustomExample';
 import Toggle from './views/containers/Toggle';
 import { TodoList } from './views/cssTransition/TodoList';
+import Notify from './views/containers/Notify';
 /*import { TextAnimationEnterElem } from './views/cssTransition/EnterAnimation';
 import { AnimatedMountComponent } from './views/cssTransition/AnimatedMount';
 import ExpandBox from './views/cssTransition/ExpandBox';
@@ -22,6 +23,7 @@ const Header = () => (
         <li><Link to='/basic' replace>CustomComponent</Link></li>
         <li><Link to='/toggle' replace>Toggle switch</Link></li>
         <li><Link to='/todolist' replace>TodoList</Link></li>
+        <li><Link to='/notify' replace>Notify</Link></li>
         <li><Link to='/textenter' replace>TextAnimationEnterElem</Link></li>
         <li><Link to='/animatedmount' replace>AnimatedMountComponent</Link></li>
         <li><Link to='/expandbox' replace>ExpandBox</Link></li>
@@ -38,6 +40,7 @@ const Main = () => (
       <Route path='/basic' component={CustomComponent}/>
       <Route path='/toggle' component={Toggle} />
       <Route path='/todolist' component={TodoList}/>
+      <Route path='/notify' component={Notify}/>
       {/*<Route path='/textenter' render={props => <TextAnimationEnterElem text="prova text" {...props} />}/>
       <Route path='/animatedmount' component={AnimatedMountComponent}/>
 <Route path='/expandbox' component={ExpandBox}/>*/}

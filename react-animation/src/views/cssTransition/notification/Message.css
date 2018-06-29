@@ -1,0 +1,23 @@
+.fading-message {
+    background-color: lightcyan;
+    color: black;
+    border-radius: 3px;
+}
+
+.fading-message-enter {
+    opacity: 0.01;
+  }
+  .fading-message-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  .fading-message-enter-done {
+    opacity: 1;
+  }
+  .fading-message-exit {
+    opacity: 1;
+  }
+  .fading-message-exit-active {
+    opacity: 0.01;
+    transition: opacity 500ms ease-in;
+  }
