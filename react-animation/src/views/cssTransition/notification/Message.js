@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import './Message.css';
 
 type MessagePropsType = {
-    key: string,
+    id: string,
     title: string,
     text: string,
     onClose: Function
@@ -13,14 +13,15 @@ type MessagePropsType = {
 const Message = (props: MessagePropsType) => {
     return (
         <CSSTransition
-            key={props.key}
+            key={props.id}
             timeout={100}
             classNames="fading-message"
+            unmountOnExit
             appear={true}
             in={true}
         >
-        <div key={props.key} className={"fading-message"}>
-            <button className={"close"} onClick={()=>{props.onClose(props.key)}}>X</button>
+        <div className={"message"} key={props.id}>
+            <button className={"close"} onClick={()=>{props.onClose(props.id)}}>X</button>
             <label>{props.title}</label>
             <p>{props.text}</p>
         </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Fragment } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import Message from './Message';
 import './Notification.css';
@@ -39,11 +40,15 @@ class Notification extends React.Component<NotificationPropsType, NotificationSt
     {
         const items = [];
         this.props.messages.forEach((v,k) => {
-            items.push(<Message key={v.id} text={v.text} title={v.title} onClose={this.onCloseElement} />);
+            items.push("t");
         });
 
         return (
-            <div>{items[0]}</div>
+            <Fragment>
+                {
+                    items.length > 0 ? <Message id={"1"} text={"text"} title={"title"} onClose={this.onCloseElement} /> : null
+                }
+            </Fragment>
         );
     }
 }

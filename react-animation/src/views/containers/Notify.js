@@ -1,5 +1,6 @@
 import React from 'react';
 import Notification from '../cssTransition/notification/Notification';
+import Message from '../cssTransition/notification/Message';
 
 class Notify extends React.Component<NotifyPropsType, NotifyStateType>
 {
@@ -31,10 +32,7 @@ class Notify extends React.Component<NotifyPropsType, NotifyStateType>
     render()
     {
         return (
-            <React.Fragment>
-                <button onClick={this.onClick}>Add message</button>
-                <Notification messages={this.state.messages} />
-            </React.Fragment>
+            <Message id={"1"} title={"1 title"} text={"1 text"} onClose={()=>{}} />
         );
     }
 }
