@@ -1,5 +1,5 @@
 import React from 'react';
-//import Message from './Message';
+import Message from './Message';
 
 import './SingleNotification.css';
 
@@ -10,6 +10,8 @@ type SingleNotificationPropsType = {
     show: boolean,
     onClose: Function
 }
+
+//Facciamolo con un HOC
 /*
 const SingleNotification = (props:SingleNotificationPropsType) => {
     return(
@@ -19,8 +21,10 @@ const SingleNotification = (props:SingleNotificationPropsType) => {
 
 export default SingleNotification;*/
 
-export default function SingleNotification(Msg) {
+function ToSingleNotification(Msg) {
     return function Single(props:SingleNotificationPropsType) {
         return <Msg className="single-notification" {...props} />
     }
 }
+
+export default ToSingleNotification(Message);

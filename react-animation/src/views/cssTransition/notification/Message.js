@@ -8,7 +8,7 @@ type MessagePropsType = {
     title: string,
     text: string,
     onClose: Function,
-    show: boolean,
+    in: boolean,
     className?: string
 };
 
@@ -21,7 +21,7 @@ const Message = (props: MessagePropsType) => {
             classNames="fading-message"
             unmountOnExit
             appear={true}
-            in={props.show}
+            in={props.in}
         >
         <div className={className} key={props.id}>
             <div className={"header"}>
