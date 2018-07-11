@@ -1,6 +1,17 @@
 import React from 'react';
-import Notification from '../cssTransition/notification/Notification';
 import Message from '../cssTransition/notification/Message';
+import SingleNotification from '../cssTransition/notification/SingleNotification';
+
+type NotifyPropsType = {
+
+};
+
+type NotifyStateType = {
+    messages: Array,
+    show: boolean
+};
+
+const Single = SingleNotification(Message);
 
 class Notify extends React.Component<NotifyPropsType, NotifyStateType>
 {
@@ -8,31 +19,27 @@ class Notify extends React.Component<NotifyPropsType, NotifyStateType>
     {
         super(props);
         this.state = {
-            messages: []
+            messages: [],
+            show: false
         };
     }
 
     onClick = () => {
-        let d = new Date().toISOString();
-        let message = {
-            id: d,
-            title: 'Title',
-            text: 'text text text ' + d
-        };
-
         this.setState(prevState => {
-            let messages = prevState.messages;
-            messages.push(message);
             return {
-                messages: messages
-            };
+                messages: prevState.messages,
+                show: !prevState.show
+            }
         });
     }
 
     render()
     {
         return (
-            <Message id={"1"} title={"1 title"} text={"1 text"} onClose={()=>{}} />
+            <React.Fragment>
+                <button onClick={this.onClick}>Toggle</button>
+                <Single id={"1"} title={"1 title"} text={"1 text"} show={this.state.show} onClose={this.onClick} />
+            </React.Fragment>
         );
     }
 }
