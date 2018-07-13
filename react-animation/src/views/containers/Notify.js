@@ -1,5 +1,5 @@
 import React from 'react';
-import SingleNotification from '../cssTransition/notification/SingleNotification';
+import { SingleMessage } from '../cssTransition/notification/SingleNotification';
 
 type NotifyPropsType = {
 
@@ -32,7 +32,7 @@ class Notify extends React.Component<NotifyPropsType, NotifyStateType>
         return (
             <React.Fragment>
                 <button onClick={this.onClick}>Toggle</button>
-                <SingleNotification id={"1"} title={"1 title"} text={"1 text"} in={this.state.show} onClose={this.onClick} />
+                <SingleMessage id={"1"} title={"1 title"} text={"1 text"} in={this.state.show} onClose={this.onClick} />
             </React.Fragment>
         );
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Message from './Message';
+import TimeoutMessage from './TimeoutMessage';
 
 import './SingleNotification.css';
 
@@ -27,4 +28,5 @@ function ToSingleNotification(Msg) {
     }
 }
 
-export default ToSingleNotification(Message);
+export const SingleMessage = ToSingleNotification(Message);
+export const SingleTimeoutMessage = ToSingleNotification(TimeoutMessage); 

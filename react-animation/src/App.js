@@ -8,6 +8,7 @@ import Toggle from './views/containers/Toggle';
 import { TodoList } from './views/cssTransition/TodoList';
 import Notify from './views/containers/Notify';
 import Notifies from './views/containers/Notifies';
+import TimeoutNotify from './views/containers/TimeoutNotify';
 /*import { TextAnimationEnterElem } from './views/cssTransition/EnterAnimation';
 import { AnimatedMountComponent } from './views/cssTransition/AnimatedMount';
 import ExpandBox from './views/cssTransition/ExpandBox';
@@ -25,6 +26,7 @@ const Header = () => (
         <li><Link to='/toggle' replace>Toggle switch</Link></li>
         <li><Link to='/todolist' replace>TodoList</Link></li>
         <li><Link to='/notify' replace>Notify</Link></li>
+        <li><Link to='/timeoutnotify' replace>TimeoutNotify</Link></li>
         <li><Link to='/notifies' replace>Notifies</Link></li>
         <li><Link to='/textenter' replace>TextAnimationEnterElem</Link></li>
         <li><Link to='/animatedmount' replace>AnimatedMountComponent</Link></li>
@@ -43,6 +45,7 @@ const Main = () => (
       <Route path='/toggle' component={Toggle} />
       <Route path='/todolist' component={TodoList}/>
       <Route path='/notify' component={Notify}/>
+      <Route path='/timeoutnotify' component={TimeoutNotify}/>
       <Route path='/notifies' component={Notifies}/>
       {/*<Route path='/textenter' render={props => <TextAnimationEnterElem text="prova text" {...props} />}/>
       <Route path='/animatedmount' component={AnimatedMountComponent}/>

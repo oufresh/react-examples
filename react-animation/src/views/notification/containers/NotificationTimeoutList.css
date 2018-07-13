@@ -1,0 +1,45 @@
+.notification-list
+{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.spaced-message {
+    margin-bottom: 10px;
+}
+
+.notification-list-enter {
+    opacity: 0.01;
+  }
+  
+  .notification-list-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  
+  .notification-list-done {
+    opacity: 1;
+  }
+  
+  .notification-list-exit {
+    opacity: 1;
+  }
+  
+.notification-list-exit-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
+  
+.notification-list-appear {
+    opacity: 0.01;
+  }
+  
+.notification-list-appear.notification-list-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+  }
