@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import './App.css';
 import store from './store/store';
 import Ping from './view/ping/Ping';
+import Fetch from './view/fetch/Fetch';
 import { Switch, Route, Link } from 'react-router-dom';
 
 const Home = () => <div />;
@@ -13,6 +14,7 @@ const Header = () => (
       <ul style={{listStyle: 'none'}}>
         <li><Link to='/' replace>Home</Link></li>
         <li><Link to='/ping' replace>Ping</Link></li>
+        <li><Link to='/fetch' replace>Fetch</Link></li>
       </ul>
     </nav>
   </header>
@@ -23,6 +25,7 @@ const Main = () => (
     <Switch>
       <Route exact path='/' component={Home}/>
       <Route path='/ping' component={Ping}/>
+      <Route path='/fetch' component={Fetch}/>
     </Switch>
   </main>
 );

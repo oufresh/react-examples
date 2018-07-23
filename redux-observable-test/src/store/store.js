@@ -1,14 +1,17 @@
 import { applyMiddleware } from 'redux';
 import { createStore} from 'redux';
+import { combineEpics } from 'redux-observable';
 import epicMiddleware from './epicMiddleware';
-//import reducers from './reducers';
-import pingEpic from '../epics/pingEpic';
-import { pingReducer } from '../modules/ping/reducer';
+import pingEpic from '../epics/ping/pingEpic';
+import fetchEpic from '../epics/fetch/fetchEpic';
+import reducers from './reducers';
 
-const store = createStore(pingReducer,
+const store = createStore(reducers,
     applyMiddleware(epicMiddleware)
 );
 
-epicMiddleware.run(pingEpic);
+const rootEpic = combineEpics(pingEpic, fetchEpic);
+
+epicMiddleware.run(rootEpic);
 
 export default store;

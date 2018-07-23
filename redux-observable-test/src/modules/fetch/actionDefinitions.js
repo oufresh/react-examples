@@ -1,0 +1,2 @@
+export const FETCH_TILE = 'FETCH_TILE@FETCH';
+export const FETCH_TILE_DONE = 'FETCH_TILE_DONE@FETCH';
