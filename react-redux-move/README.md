@@ -1,0 +1,1 @@
+Move widget dragging and docking managed with rxjs

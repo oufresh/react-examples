@@ -1,1 +1,0 @@
-Test redux middleware
