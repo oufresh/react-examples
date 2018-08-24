@@ -1,5 +1,5 @@
-import { PING/*, PONG*/ } from '../modules/ping/actionDefinitions';
-import { pong } from '../modules/ping/actionCreators';
+import { PING/*, PONG*/ } from '../../modules/ping/actionDefinitions';
+import { pong } from '../../modules/ping/actionCreators';
 import { ofType } from 'redux-observable';
 import { mapTo, delay } from 'rxjs/operators';
 
