@@ -1,0 +1,6 @@
+.dockingArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border: 1px solid grey;
+}

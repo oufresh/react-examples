@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { app } from './app.css';
-import SidebarController from './sidebar/SidebarController';
+import DockingArea from './dock/component/DockingArea';
+import DockingWidget from './dock/component/DockingWidget';
+
+const areaStyle = {
+    position: 'fixed',
+    right: '0px',
+    height: '100vh',
+    width: '200px'
+};
 
 class App extends React.Component
 {
@@ -13,8 +21,11 @@ class App extends React.Component
     {
         return (
             <div className={app}>
-                <h1>Sidebar</h1>
-                <SidebarController />
+                <DockingArea style={areaStyle}>
+                    <DockingWidget width={'100%'} height={'250px'} backgroundColor={'lightyellow'} />
+                    <DockingWidget width={'100%'} height={'150px'} backgroundColor={'lightblue'} />
+                    <DockingWidget width={'100%'} height={'150px'} backgroundColor={'lightgreen'} />
+                </DockingArea>
             </div>
         );
     }

@@ -1,0 +1,1 @@
+export const dockingArea: string;
