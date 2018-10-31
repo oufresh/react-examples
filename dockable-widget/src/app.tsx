@@ -6,7 +6,6 @@ import DockingWidget from './dock/component/DockingWidget';
 const areaStyle = {
     position: 'fixed',
     right: '0px',
-    height: '100vh',
     width: '200px'
 };
 

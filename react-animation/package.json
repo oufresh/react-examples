@@ -6,7 +6,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "2.1.0",
     "react-transition-group": "^2.3.1"
   },
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "eslint": "^5.0.1",
-    "eslint-plugin-flowtype": "^2.49.3",
+    "eslint-plugin-flowtype": "^3.1.4",
     "eslint-plugin-react": "^7.9.1"
   }
 }
