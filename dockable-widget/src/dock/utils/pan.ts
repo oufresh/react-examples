@@ -9,7 +9,14 @@ export type PanEvent =
     pY: number;
 };
 
-export function createPanManager(mouseDowns: Rx.Observable<Event>, bodyMoves: Rx.Observable<Event>, bodyUp: Rx.Observable<Event>): Rx.Observable<PanEvent>
+export type MouseCoords = {
+    clientX: number;
+    clientY: number;
+    pageX: number;
+    pageY: number;
+}
+
+export function createPanManager(mouseDowns: Rx.Observable<MouseCoords>, bodyMoves: Rx.Observable<Event>, bodyUp: Rx.Observable<Event>): Rx.Observable<PanEvent>
 {
     const mousePan: Rx.Observable<PanEvent> = mouseDowns.pipe(Operators.switchMap((contactPoint: MouseEvent) => {
         let moveXPrec = 0;
@@ -43,6 +50,14 @@ export function createPanManager(mouseDowns: Rx.Observable<Event>, bodyMoves: Rx
     return mousePan;
 }
 
+export function event2MouseCoords(e: MouseEvent): MouseCoords {
+    return {
+        clientX: e.clientX,
+        clientY: e.clientY,
+        pageX: e.pageX,
+        pageY: e.pageY
+    };
+}
 
 
 

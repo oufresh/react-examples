@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { app } from './app.css';
 import DockingArea from './dock/component/DockingArea';
-import DockingWidget from './dock/component/DockingWidget';
 
 const areaStyle = {
     position: 'fixed',
@@ -20,11 +19,7 @@ class App extends React.Component
     {
         return (
             <div className={app}>
-                <DockingArea style={areaStyle}>
-                    <DockingWidget width={'100%'} height={'250px'} backgroundColor={'lightyellow'} />
-                    <DockingWidget width={'100%'} height={'150px'} backgroundColor={'lightblue'} />
-                    <DockingWidget width={'100%'} height={'150px'} backgroundColor={'lightgreen'} />
-                </DockingArea>
+                <DockingArea style={areaStyle} />
             </div>
         );
     }
