@@ -9,5 +9,5 @@ import { delayEpic } from '../modules/delay/dealyEpic';
  */
 
 export const rootEpic = combineEpics(
-    [timerEpic, delayEpic]
+    timerEpic, delayEpic
 );

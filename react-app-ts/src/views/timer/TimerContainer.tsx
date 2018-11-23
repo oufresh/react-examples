@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
 import { start, stop } from '../../modules/timer/actionCreators';
-import { IAppState} from '../../store/store';
+import { IAppState} from '../../store/types';
 import { TimerComponent } from './TimerComponent';
 
 interface InjectedProps {

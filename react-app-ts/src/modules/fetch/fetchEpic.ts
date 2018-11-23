@@ -1,5 +1,5 @@
     
-    // https://developers.google.com/web/updates/2017/09/abortable-fetch
+   // https://developers.google.com/web/updates/2017/09/abortable-fetch
     // Create an instance.
     const controller = new AbortController()
     const signal = controller.signal
@@ -11,7 +11,7 @@
     })
     */
 
-
+/*
     function beginFetching() {
         console.log('Now fetching');
         var urlToFetch = "https://slowwly.robertomurray.co.uk/delay/3000/url/https://code.jquery.com/jquery-3.2.1.min.js";
@@ -43,4 +43,4 @@
             .takeUntil(actions.ofType('FETCH_USER_ABORT'))
             .startWith({ type: 'FETCH_USER_PENDING' })
         )
-      );
+    );*/

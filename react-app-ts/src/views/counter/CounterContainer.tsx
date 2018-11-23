@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
 import { decrement, increment } from '../../modules/counter/actionCreators';
-import { IAppState} from '../../store/store';
+import { IAppState} from '../../store/types';
 import { CounterComponent } from './CounterComponent';
 
 export interface ICounterProps {

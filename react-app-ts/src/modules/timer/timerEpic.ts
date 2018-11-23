@@ -1,6 +1,6 @@
 import { Epic, ofType } from 'redux-observable'
 import { Observable, interval } from 'rxjs';
-import { mapTo, map, switchMap, takeUntil } from 'rxjs/operators';
+import { mapTo, /*map,*/ switchMap, takeUntil } from 'rxjs/operators';
 import { IAction } from "src/helper/actions";
 import { TimerActions } from './actionDefinitions';
 
@@ -10,10 +10,10 @@ export const timerEpic: Epic<IAction<TimerActions>> = (action: Observable<IActio
         switchMap(() => {
             return interval(5000).pipe(takeUntil(action.pipe(ofType(TimerActions.STOP))));
         }),
-        map((o: any) => {
+        /*map((o: any) => {
             console.log(o);
             return o;
-        }),
+        }),*/
         mapTo({ type: TimerActions.INC })
     );
 }
