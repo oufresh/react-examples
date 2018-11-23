@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
-import { start } from '../../modules/timer/actionCreators';
+import { start, stop } from '../../modules/timer/actionCreators';
 import { IAppState} from '../../store/store';
 import { TimerComponent } from './TimerComponent';
 
@@ -9,6 +9,7 @@ interface InjectedProps {
     readonly runnig: boolean;
     readonly value: number;
     start?: () => AnyAction;
+    stop?: () => AnyAction;
 }
 
 interface ITimerProps {
@@ -24,7 +25,8 @@ const mapStateToProps = (state: IAppState) => ({
   
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
     return {
-        start: () => dispatch(start())
+        start: () => dispatch(start()),
+        stop: () => dispatch(stop())
     };
 }
 
@@ -39,7 +41,7 @@ export class TimerContainer extends React.Component<ITimerContainerProps>
         return (
             <div>
                 <h1>Timer with observable</h1>
-                <TimerComponent value={this.props.value} running={this.props.runnig} onStart={this.props.start} />
+                <TimerComponent value={this.props.value} running={this.props.runnig} onStart={this.props.start} onStop={this.props.stop}/>
             </div>
             );
     }

@@ -1,6 +1,6 @@
 import { combineEpics } from 'redux-observable';
 import { timerEpic } from '../modules/timer/timerEpic';
-
+import { delayEpic } from '../modules/delay/dealyEpic';
 /**
  * redux-observable epics: take an observalbe of action and the store and return an observable of an action.
  * The actions you emit will be immediately dispatched through the normal store.dispatch(), 
@@ -9,5 +9,5 @@ import { timerEpic } from '../modules/timer/timerEpic';
  */
 
 export const rootEpic = combineEpics(
-    timerEpic
+    [timerEpic, delayEpic]
 );

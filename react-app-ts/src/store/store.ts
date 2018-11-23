@@ -3,10 +3,10 @@ import { createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createEpicMiddleware } from 'redux-observable';
 import { counterReducer } from '../modules/counter/reducer';
-import { ICounter } from '../modules/counter/types';
 import { timerReducer } from '../modules/timer/reducer';
-import { ITimer } from '../modules/timer/types';
 import { rootEpic } from './epics';
+import { IAppState } from './types';
+import logger from 'redux-logger';
 
 const rootReducer = combineReducers({
   counter: counterReducer,
@@ -15,13 +15,8 @@ const rootReducer = combineReducers({
 
 const epicMiddleware = createEpicMiddleware();
 
-export interface IAppState { 
-  counter: ICounter;
-  timer: ITimer;
-};
-
 function configureStore(
-    initialState?: object
+    initialState?: IAppState
   ): Store {
     // create the composing function for our middlewares
     const composeEnhancers = composeWithDevTools({})
@@ -31,7 +26,7 @@ function configureStore(
     const ret = createStore(
         rootReducer,
       initialState,
-      composeEnhancers(applyMiddleware(epicMiddleware))
+      composeEnhancers(applyMiddleware(epicMiddleware, logger))
     )
 
     epicMiddleware.run(rootEpic);

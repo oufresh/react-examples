@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import { Reducer } from 'redux'
+import { Reducer } from 'redux';
 import { IAction } from '../../helper/actions';
 import { TimerActions } from './actionDefinitions';
 import { initialValue, ITimer } from './types';

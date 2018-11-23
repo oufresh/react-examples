@@ -7,7 +7,7 @@ export interface ICounterProps {
     onDecrement?: () => any;
 }
 
-export const CounterComponent = (props: ICounterProps) => {
+export const CounterComponent: React.SFC<ICounterProps> = (props: ICounterProps) => {
     return(
         <div>
             <h1>{props.title}</h1>

@@ -14,3 +14,16 @@ export function createAction<TAction extends IAction<TAction["type"]>>(
   ): () => Action<TAction["type"]> {
     return () => ({ type });
 }
+
+export function createPayloadedAction<
+  TAction extends IPayloadedAction<TAction["type"], TAction["payload"]>
+>(
+  type: TAction["type"]
+): (
+  payload: TAction["payload"]
+) => IPayloadedAction<TAction["type"], TAction["payload"]> {
+  return (payload: TAction["payload"]) => ({
+    type,
+    payload
+  });
+}
