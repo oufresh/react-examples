@@ -4,13 +4,15 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createEpicMiddleware } from 'redux-observable';
 import { counterReducer } from '../modules/counter/reducer';
 import { timerReducer } from '../modules/timer/reducer';
+import { delayReducer } from '../modules/delay/reducer';
 import { rootEpic } from './epics';
 import { IAppState } from './types';
 import logger from 'redux-logger';
 
 const rootReducer = combineReducers({
   counter: counterReducer,
-  timer: timerReducer
+  timer: timerReducer,
+  delay: delayReducer
 });
 
 const epicMiddleware = createEpicMiddleware();

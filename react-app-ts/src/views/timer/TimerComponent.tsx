@@ -8,7 +8,7 @@ export interface ITimerComponentProps {
 };
 
 export const TimerComponent: React.SFC<ITimerComponentProps> = (props: ITimerComponentProps) => {
-    console.log(props.running);
+    // console.log(props.running);
     return (
         <div>
             <div>

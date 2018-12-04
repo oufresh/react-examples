@@ -1,8 +1,8 @@
     
    // https://developers.google.com/web/updates/2017/09/abortable-fetch
     // Create an instance.
-    const controller = new AbortController()
-    const signal = controller.signal
+    // const controller = new AbortController()
+    // const signal = controller.signal
 
     /*
     // Register a listenr.
@@ -44,3 +44,5 @@
             .startWith({ type: 'FETCH_USER_PENDING' })
         )
     );*/
+
+    // https://blog.logrocket.com/a-beginners-guide-to-redux-observable-c0381da8ed3a
