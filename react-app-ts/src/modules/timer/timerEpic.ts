@@ -1,7 +1,7 @@
 import { Epic, ofType } from 'redux-observable'
 import { Observable, interval } from 'rxjs';
 import { mapTo, /*map,*/ switchMap, takeUntil } from 'rxjs/operators';
-import { IAction } from "src/helper/actions";
+import { IAction } from "../../helper/actions";
 import { TimerActions } from './actionDefinitions';
 
 export const timerEpic: Epic<IAction<TimerActions>> = (action: Observable<IAction<TimerActions>>) => {

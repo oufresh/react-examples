@@ -18,12 +18,13 @@ export interface IDelayStartPayload {
 }
 
 export interface IDelayStartAction extends Action<IDelayActionTypes> {
-    type: IDelayActionTypes.START;
-    payload: IDelayStartPayload
+    type: IDelayActionTypes;
+    payload: IDelayStartPayload;
 };
 
 export interface IDelayStopAction extends Action<IDelayActionTypes> {
-    type: IDelayActionTypes.STOP;
+    type: IDelayActionTypes;
+    payload?: IDelayStartPayload
 };
 
 export type IDelayAction = IDelayStartAction | IDelayStopAction;
