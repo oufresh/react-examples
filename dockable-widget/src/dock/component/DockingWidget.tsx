@@ -27,7 +27,7 @@ class DockingWidget extends React.PureComponent<DockingWidgetPropsT>
     panSub: Rx.Subscription;
     state: DockingwidgetStateT;
     wr: React.RefObject<HTMLDivElement>;
-    rect: DOMRect;
+    rect: DOMRect | null;
 
     mouseDownS: Rx.Subject<MouseCoords>;
 
