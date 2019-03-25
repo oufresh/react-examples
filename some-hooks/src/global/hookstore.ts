@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export type StoreSetterFunction = (value: any) => any
 
@@ -28,6 +28,14 @@ export function useStore(): [any, StoreSetterFunction] {
   if (!store.setters.includes(set)) {
     store.setters.push(set)
   }
+
+  //clean setters
+  useEffect(
+    () => () => {
+      store.setters = store.setters.filter(setter => setter !== set)
+    },
+    []
+  )
 
   return [state, store.setState]
 }
