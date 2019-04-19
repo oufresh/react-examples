@@ -5,6 +5,7 @@ import UserContext from './user/UserContext';
 import Toolbar from './views/toolbar/Toolbar';
 import ThemeToggle from './views/themetoggle/ThemeToggle';
 import ThemedList from './views/themedlist/ThemedList';
+import { CheckBox } from './views/checkbox/CheckBox';
 
 const names = ['Pippo', 'Pluto', 'Paperino'];
 
@@ -32,14 +33,13 @@ class App extends Component {
     );
   }
 
-  /*onToggleSwitch()
-  {
+  onChange = () => {
     this.setState(state => {
       let st = state;
       st.checked = !state.checked;
       return st;
     });
-  }*/
+  }
 
   render() {
     return (
@@ -51,6 +51,8 @@ class App extends Component {
             <ThemeToggle />
             <br />
             <ThemedList elements={names} />
+            <br />
+            <CheckBox checked={this.state.checked} onChange={this.onChange} />
           </div>
         </UserContext.Provider>
       </ThemeContext.Provider>
