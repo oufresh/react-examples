@@ -33,11 +33,11 @@ export function getAll() {
         headers: authHeader()
     };
 
-    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
+    //return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
 }
 
-export function handleResponse(response) {
-    return response.text().then(text => {
+export function handleResponse(response: any) {
+    return response.text().then((text: string) => {
         const data = text && JSON.parse(text);
         if (!response.ok) {
             if (response.status === 401) {
