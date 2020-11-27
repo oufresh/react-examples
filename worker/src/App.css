@@ -1,0 +1,35 @@
+.App {
+
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  background-color: #282c34;
+}
+
+.App-header {
+  text-align: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-main {
+  color: white;
+}
+.App-main-label {
+  color: #61dafb;
+}
+
+.App-button {
+  color: black;
+  border-radius: 2px;
+  box-shadow: none;
+  margin: 0px;
+  border: 0px;
+  background-color: lightgray;
+  outline: none;
+}
+
+.App-button:hover {
+  cursor: pointer;
+}
