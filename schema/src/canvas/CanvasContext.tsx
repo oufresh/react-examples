@@ -8,5 +8,5 @@ export interface TCanvasContext {
 };
 
 // This is the context that components in need of canvas-access will use:
-export const CanvasContext = createContext<fabric.Canvas |null>(null);
+export const CanvasContext = createContext<fabric.Canvas | fabric.StaticCanvas|null>(null);
  

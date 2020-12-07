@@ -3,7 +3,7 @@ import "./App.css";
 import Canvas from "./canvas/Canvas";
 
 function App() {
-  const [geometries, setGeometries] = useState<Array<any>>([{top: 10, left: 10, width: 100, height: 100, stroke: "green", strokeWidth: 2}]);
+  const [geometries, setGeometries] = useState<Array<any>>([{top: 100, left: 100, width: 100, height: 100, stroke: "green", strokeWidth: 2}]);
   return (
     <div className="App">
       <header className="App-header">

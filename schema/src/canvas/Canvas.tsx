@@ -12,7 +12,7 @@ export type CanvasProps = {
 
 const Canvas = (props: CanvasProps) => {
   const cRef = useRef(null);
-  const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
+  const [canvas, setCanvas] = useState<fabric.StaticCanvas | null>(null);
 
   useEffect(() => {
     if (cRef.current != null && canvas == null) {
@@ -20,10 +20,31 @@ const Canvas = (props: CanvasProps) => {
       if (el) {
         const d: HTMLDivElement = el;
         console.log("Build fabric cnvas: " + d.clientWidth + "x" + d.clientHeight);
+
+        //static canvas , noselection active now, no interaction for now
         const cv = new fabric.Canvas("c", {
           height: d.clientHeight,
           width: d.clientWidth,
           backgroundColor: "black",
+          selection: false
+        });
+        //cv.selectionColor = 'rgba(0,255,0,0.3)';
+        //cv.selectionBorderColor = 'red';
+        //cv.selectionLineWidth = 5;
+        
+        cv.hoverCursor = 'pointer';
+        //cv.selectionBorderColor ="#AF00AF";
+        //cv.selectionLineWidth = 2;
+        cv.on('mouse:down', (options) =>{
+          //console.log(options.e.clientX, options.e.clientY);
+          //console.log(options);
+          if (options.target) {
+            console.log(options.target.name + ":", options.target.data);
+          } else {
+            console.log("no target");
+            cv.discardActiveObject();
+            cv.requestRenderAll();
+          }
         });
         setCanvas(cv);
       }
@@ -31,7 +52,7 @@ const Canvas = (props: CanvasProps) => {
 
     return function cleanup() {
       console.warn("cleanup");
-      //canvas?.dispose();
+      canvas?.dispose();
     };
     //only on umount cleanup, disable the warning
   // eslint-disable-next-line react-hooks/exhaustive-deps
