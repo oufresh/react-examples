@@ -1,4 +1,27 @@
 
+/*
+ *  STYLE 4
+ */
+
+ ::-webkit-scrollbar-track
+ {
+   box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+   -webkit-box-shadow: inset 0 0 0px rgba(0,0,0,0);
+   background-color: #282c34;
+ }
+ 
+ ::-webkit-scrollbar
+ {
+   width: 10px;
+   background-color: #282c34;
+ }
+ 
+ ::-webkit-scrollbar-thumb
+ {
+   background-color: #A5A5A5;
+   border: 0px
+ }
+
 .App {
   position: absolute;
   top: 0px;
@@ -34,6 +57,37 @@ justify-content: flex-start;
   justify-content: flex-start;
   border-top: 1px solid gray;
 }
+.App-bar-button {
+  background-color: rgb(231, 231, 231);
+  border-radius: 2px;
+  border: none;
+  box-shadow: none;
+  height: 30px;
+  margin: 10px;
+}
+.App-bar-button:hover {
+  background-color:rgb(211, 211, 211);
+  cursor: pointer;
+}
+.App-bar-button-on {
+  background-color: rgb(7, 231, 7);
+}
+
+.App-bar-button-on:hover {
+  background-color: rgb(7, 241, 7);
+}
+
+.App-bar-button:focus {
+  outline: none;
+}
+.App-bar-button:hover:focus {
+  outline: none;
+}
+
+.App-bar-button:focus:active {
+  outline: none;
+}
+
 .App-canvas {
   flex: 1;
   border: 1px solid gray;
@@ -54,3 +108,29 @@ justify-content: flex-start;
   color: #61dafb;
 }
 
+.element-details
+{
+  background-color: rga(121, 121, 121, 0.5);
+  color: black;
+  padding: 5px;
+  border-radius: 2px;
+  border: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-height: 300px;
+  top:0px;
+  right: 0px;
+  position: absolute;
+  width: 200px;
+  margin: 5px;
+}
+
+.element-details-row {
+  color: #af88ee;
+  margin-top: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: calc(4px + 0.9vmin);
+}

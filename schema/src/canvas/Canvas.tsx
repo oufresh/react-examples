@@ -8,6 +8,9 @@ import { Render} from "./Render";
 export type CanvasProps = {
   geometries: Array<any>,
   backgroundColor?: string | fabric.Pattern;
+  editing: boolean;
+  onEdit: (geoms:Array<any>)=>void;
+  onElementSelected: (target: any) => void;
 }
 
 const Canvas = (props: CanvasProps) => {
@@ -38,13 +41,16 @@ const Canvas = (props: CanvasProps) => {
         cv.on('mouse:down', (options) =>{
           //console.log(options.e.clientX, options.e.clientY);
           //console.log(options);
-          if (options.target) {
+          props.onElementSelected(options.target);
+         /* if (options.target) {
             console.log(options.target.name + ":", options.target.data);
+            
           } else {
+            props.onElementSelected(null);
             console.log("no target");
             cv.discardActiveObject();
             cv.requestRenderAll();
-          }
+          }*/
         });
         setCanvas(cv);
       }

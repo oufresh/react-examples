@@ -21,7 +21,7 @@ export const Render = ({geometries}: {geometries: Array<any>}) => {
                 rect.lockUniScaling =true;
                 rect.hasControls = false;
                // rect.borderColor = "#AF00AFF";
-                //rect.set("padding", 5);
+                rect.set("padding", 5);
                 //rect.selectionBackgroundColor = "transparent";
                 
                 rect.setOptions({ name: "pippo", data:{a:50}});
@@ -32,7 +32,7 @@ export const Render = ({geometries}: {geometries: Array<any>}) => {
                     //rect.set("fill", "red");
                     //canvas.requestRenderAll();
                 
-                console.log(t);
+                //console.log(t);
                 });
                 canvas.add(rect);
             }
