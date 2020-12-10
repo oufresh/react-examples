@@ -19,7 +19,8 @@
  ::-webkit-scrollbar-thumb
  {
    background-color: #A5A5A5;
-   border: 0px
+   border: 0px;
+   border-radius: 2px;
  }
 
 .App {

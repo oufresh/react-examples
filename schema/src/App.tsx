@@ -2,10 +2,12 @@ import React, { useCallback, useState } from "react";
 import "./App.css";
 import Canvas from "./canvas/Canvas";
 import { ElementDetails } from "./details/Elememtdetails";
+import {useSelector,useDispatch } from "react-redux";
+import { StateType } from "./schema";
 
 function App() {
   const [editing, setEditing]= useState(false);
-  const [geometries, setGeometries] = useState<Array<any>>([{top: 100, left: 100, width: 100, height: 100, stroke: "green", strokeWidth: 2}]);
+  const geometries = useSelector((s:StateType) => s);
   const [selectedTarget, setSelectedTarget] = useState<any>(null);
 
   const onEdit = useCallback((geoms: Array<any>)=>{
