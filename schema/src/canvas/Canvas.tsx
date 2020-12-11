@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { fabric } from "fabric";
 import { CanvasContext } from "./CanvasContext";
 import { Render} from "./Render";
+import { on } from "cluster";
 
 // This is the context that components in need of canvas-access will use:
 
@@ -11,11 +12,21 @@ export type CanvasProps = {
   editing: boolean;
   onEdit: (geoms:Array<any>)=>void;
   onElementSelected: (target: any) => void;
+  onObjectMoving: (target: fabric.Object | undefined, transform: any) => void;
+  onObjectMoved: (target: fabric.Object | undefined, transform: any) => void;
 }
 
 const Canvas = (props: CanvasProps) => {
+  const { editing,onObjectMoving, onObjectMoved } = props;
   const cRef = useRef(null);
   const [canvas, setCanvas] = useState<fabric.StaticCanvas | null>(null);
+  const objectMoving = useCallback((e:fabric.IEvent)=>{
+    onObjectMoving(e.target, e.transform);
+  }, [onObjectMoving]);
+
+  const objectMoved = useCallback((e:fabric.IEvent)=>{
+    onObjectMoved(e.target, e.transform);
+  },[onObjectMoved]);
 
   useEffect(() => {
     if (cRef.current != null && canvas == null) {
@@ -38,26 +49,19 @@ const Canvas = (props: CanvasProps) => {
         cv.hoverCursor = 'pointer';
         //cv.selectionBorderColor ="#AF00AF";
         //cv.selectionLineWidth = 2;
-        cv.on('mouse:down', (options) =>{
-          //console.log(options.e.clientX, options.e.clientY);
-          //console.log(options);
+        cv.on("object:moving", objectMoving);
+        cv.on("object:moved",objectMoved);
+        cv.on("object:scaling", ()=>{});
+        cv.on("object:rotating", ()=>{});
+        cv.on('mouse:down', (options) => {
           props.onElementSelected(options.target);
-         /* if (options.target) {
-            console.log(options.target.name + ":", options.target.data);
-            
-          } else {
-            props.onElementSelected(null);
-            console.log("no target");
-            cv.discardActiveObject();
-            cv.requestRenderAll();
-          }*/
         });
         setCanvas(cv);
       }
     }
 
     return function cleanup() {
-      console.warn("cleanup");
+      console.warn("cleanup canvas");
       canvas?.dispose();
     };
     //only on umount cleanup, disable the warning
@@ -68,7 +72,7 @@ const Canvas = (props: CanvasProps) => {
     <div className={"Fabric-canvas"} ref={cRef}>
       <canvas id="c">
         <CanvasContext.Provider value={canvas}>
-          <Render geometries={props.geometries}/>
+          <Render editing={editing} geometries={props.geometries}/>
       </CanvasContext.Provider>
       </canvas>
     </div>

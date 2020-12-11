@@ -5,3 +5,7 @@ export type SaveGeometries = {
     //changed: Array<string | number>
     }
 };
+export type ToggleEditing = {
+    type: "ToggleEditing",
+    payload: boolean
+};

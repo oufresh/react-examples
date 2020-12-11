@@ -3,7 +3,8 @@ import { createRect, createLine } from "./geometries";
 
 export const render = (
   canvas: fabric.Canvas | fabric.StaticCanvas | null,
-  geometries: Array<any>
+  geometries: Array<any>,
+  editing: boolean
 ): void => {
   if (canvas == null) return;
   canvas.clear();
@@ -14,12 +15,21 @@ export const render = (
         obj = createRect(geom);
         break;
       case "line":
-          console.log(geom);
-          obj = createLine(geom);
-          break;
-      default:
-          obj = null;
+        console.log(geom);
+        obj = createLine(geom);
         break;
+      default:
+        obj = null;
+        break;
+    }
+
+    if (editing === true) {
+      //editing mode
+      obj?.set("lockMovementX", false);
+      obj?.set("lockMovementY", false);
+    } else {
+      obj?.set("lockMovementX", true);
+      obj?.set("lockMovementY", true);
     }
     if (obj) canvas.add(obj);
   }
