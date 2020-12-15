@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import Canvas from "./canvas/Canvas";
 import { ElementDetails } from "./details/Elememtdetails";
@@ -10,6 +10,8 @@ function App() {
   const editing = useSelector((s: SchemaStateType) => s.editing);
   const geometries = useSelector((s: SchemaStateType) => s.geometries);
   const [selectedTarget, setSelectedTarget] = useState<any>(null);
+
+  useEffect(() => {}, []);
 
   const onEdit = useCallback((geoms: Array<any>) => {}, []);
 
@@ -25,20 +27,35 @@ function App() {
     else setSelectedTarget(null);
   }, []);
 
-  const onObjectMoving = useCallback((target: any,transform: any) => {
+  const onObjectMoving = useCallback((target: any, transform: any) => {
     //console.log(target);
-    console.log("Object: " +target.name);
-    console.log("isMoving:" + target.isMoving);
-    console.log("top " +target.top + "left " + target.left);
+    //console.log("Object: " + target.name);
+    //console.log("isMoving:" + target.isMoving);
+    //console.log("top " + target.top + "left " + target.left);
     //console.log(transform);
   }, []);
 
-  const onObjectMoved = useCallback((target: any,transform: any)=>{
-    console.log("Object moved");
-    console.log("Object: " +target.name);
-    console.log("isMoving:" + target.isMoving);
-    console.log("top " +target.top + "left " + target.left);
-  },[])
+  const onObjectMoved = useCallback(
+    (target: any, transform: any) => {
+      console.log("Object moved");
+      console.log("Object: " + target.name);
+      console.log("Object type: " + target.type);
+      //console.log("isMoving:" + target.isMoving);
+      console.log("top: " + target.top + ",left: " + target.left);
+      dispatch({
+        type: "SaveGeometries",
+        payload: [
+          {
+            name: target.name,
+            type: target.type,
+            top: target.top,
+            left: target.left,
+          },
+        ],
+      });
+    },
+    [dispatch]
+  );
 
   return (
     <div className="App">

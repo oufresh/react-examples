@@ -2,7 +2,7 @@ import { SaveGeometries, ToggleEditing } from "./actions";
 import { SchemaStateType } from "./type";
 
 const reducer = (
-  state: SchemaStateType | undefined = { geometries: [], editing: false },
+  state: SchemaStateType | undefined = { geometries: [], editing: false, editingGeometries: [] },
   action: SaveGeometries | ToggleEditing
 ): SchemaStateType => {
   switch (action.type) {
@@ -12,13 +12,15 @@ const reducer = (
         ns.push(elem);
       }
       return {
-        geometries: ns,
+        geometries: state.geometries,
         editing: state.editing,
+        editingGeometries: action.payload.geometries
       };
     case "ToggleEditing":
       return {
         editing: !state.editing,
         geometries: state.geometries,
+        editingGeometries: []
       };
     default:
       //console.log(state);

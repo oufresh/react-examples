@@ -15,7 +15,7 @@ export const render = (
         obj = createRect(geom);
         break;
       case "line":
-        console.log(geom);
+        //console.log(geom);
         obj = createLine(geom);
         break;
       default:
