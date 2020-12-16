@@ -22,7 +22,7 @@ function App() {
   }, [dispatch]);
 
   const onElementSelected = useCallback((target: any) => {
-    console.warn(target);
+    //console.warn(target);
     if (target) setSelectedTarget(target);
     else setSelectedTarget(null);
   }, []);

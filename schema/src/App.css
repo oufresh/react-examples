@@ -111,8 +111,9 @@ justify-content: flex-start;
 
 .element-details
 {
-  background-color: rga(121, 121, 121, 0.5);
-  color: black;
+  overflow: auto;
+  /*height: 200px;*/
+  background-color: transparent;
   padding: 5px;
   border-radius: 2px;
   border: 1px solid gray;
@@ -123,7 +124,7 @@ justify-content: flex-start;
   top:0px;
   right: 0px;
   position: absolute;
-  width: 200px;
+  width: 300px;
   margin: 5px;
 }
 
@@ -134,4 +135,47 @@ justify-content: flex-start;
   flex-direction: row;
   justify-content: space-between;
   font-size: calc(4px + 0.9vmin);
+  overflow: hidden; /* not panic is cut for now */
+  padding-top: 4px;
+}
+
+.element-details-head {
+  color: #af88ee;
+  margin-top: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-size: calc(4px + 0.9vmin);
+}
+
+.element-details-divider {
+  border-bottom: 1px solid gray;
+}
+.element-details-head > button 
+{
+  background-color: transparent;
+  margin: 0px;
+  box-shadow: none;
+  border: none;
+  color: #af88ee;
+  padding: 0px;
+  font-size: 18px;
+  outline: none !important;
+}
+
+.element-details-head > button:hover
+{
+  cursor: pointer;
+}
+
+.element-details-head > button:hover:active
+.element-details-head > button:focus:active
+.element-details-head > button:active
+.element-details-head > button:focus
+{
+  outline: none !important;
+}
+
+.element-details-row span{
+  color: lightgray!important;
 }

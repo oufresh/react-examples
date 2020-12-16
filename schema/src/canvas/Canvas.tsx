@@ -23,12 +23,20 @@ const Canvas = (props: CanvasProps) => {
     (e: fabric.IEvent) => {
       //gestire connections
       if (e.target) {
-        //console.log(e.target);
+        //console.log(e.target.aCoords);
+        //console.log(e.target.oCoords);
         //console.log(e.target.top - e.target.t);
         const t= e.transform as any;
 
         //search for delta moving
-        console.log(e.target.top as number - t.original.top);
+        console.log(t.action);
+        console.log("transform originX: " + e.transform?.originX);
+        console.log("transform originY: " + e.transform?.originY);
+        //e.
+        console.log(t);
+        //console.log("target.top: " +e.target.top + ", t.lastY:" + t.lastY)
+        console.log("Y diff: " + ((e.target.top as number) - t.original.top));
+        console.log("X diff: " + ((e.target.left as number) - t.original.left));
         //console.log(t)
         }
       onObjectMoving(e.target, e.transform);

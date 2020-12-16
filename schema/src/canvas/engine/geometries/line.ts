@@ -19,6 +19,6 @@ export function createLine(geometry: any): fabric.Line {
     selectionBackgroundColor: "transparent",
     padding: 5,
   });
-  line.setOptions({ name: "pippo", data: { a: 50 } });
+  line.setOptions({ name: geometry.name, data: geometry.data });
   return line;
 }

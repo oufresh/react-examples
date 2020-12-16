@@ -8,19 +8,18 @@
     "height": 100,
     "stroke": "#00F5F0",
     "strokeWidth": 2,
-    "data": { "a": 10, "b": "BB" }
+    "data": { "a": 10, "b": "BB", "connection": { "anchor": "L", "name": "LLL" } }
   },
   {
     "type": "rect",
-    "name": "AAB",
+    "name": "BBB",
     "top": 100,
     "left": 600,
     "width": 100,
     "height": 100,
     "stroke": "#00F5F0",
     "strokeWidth": 2,
-    "data": { "a": 10, "b": "BB" },
-    "connection": { "anchor": "L", "name": "LLL" }
+    "data": { "a": 10, "b": "BB", "connection": { "anchor": "R", "name": "LLL" } }
   },
   {
     "type": "line",
@@ -28,6 +27,6 @@
     "coords": [200, 150, 600, 150],
     "stroke": "#00F5F0",
     "strokeWidth": 4,
-    "data": { "a": 10, "b": "BB" }
+    "data": { "a": 10, "b": "BB", "from": "AAA", "to": "BBB"}
   }
 ]

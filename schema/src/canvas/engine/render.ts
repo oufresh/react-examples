@@ -15,14 +15,14 @@ export const render = (
         obj = createRect(geom);
         break;
       case "line":
-        //console.log(geom);
         obj = createLine(geom);
         break;
       default:
         obj = null;
         break;
     }
-
+    console.log(obj);
+    console.log(obj?.type);
     if (editing === true) {
       //editing mode
       obj?.set("lockMovementX", false);
