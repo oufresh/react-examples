@@ -2,91 +2,84 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { fabric } from "fabric";
 import { CanvasContext } from "./CanvasContext";
 import { Render } from "./Render";
+import debounce from "../commons/debounce";
 
 // This is the context that components in need of canvas-access will use:
 
 export type CanvasProps = {
-  geometries: Array<any>;
   backgroundColor?: string | fabric.Pattern;
   editing: boolean;
-  onEdit: (geoms: Array<any>) => void;
+  //onEdit: (geoms: Array<any>) => void;
   onElementSelected: (target: any) => void;
-  onObjectMoving: (target: fabric.Object | undefined, transform: any) => void;
-  onObjectMoved: (target: fabric.Object | undefined, transform: any) => void;
 };
 
 const Canvas = (props: CanvasProps) => {
-  const { editing, onObjectMoving, onObjectMoved } = props;
+  const { editing } = props;
   const cRef = useRef(null);
-  const [canvas, setCanvas] = useState<fabric.StaticCanvas | null>(null);
-  const objectMoving = useCallback(
-    (e: fabric.IEvent) => {
-      //gestire connections
-      if (e.target) {
-        //console.log(e.target.aCoords);
-        //console.log(e.target.oCoords);
-        //console.log(e.target.top - e.target.t);
-        const t= e.transform as any;
+  //const size = useWindowSize();
+  const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
 
-        //search for delta moving
-        console.log(t.action);
-        console.log("transform originX: " + e.transform?.originX);
-        console.log("transform originY: " + e.transform?.originY);
-        //e.
-        console.log(t);
-        //console.log("target.top: " +e.target.top + ", t.lastY:" + t.lastY)
-        console.log("Y diff: " + ((e.target.top as number) - t.original.top));
-        console.log("X diff: " + ((e.target.left as number) - t.original.left));
-        //console.log(t)
-        }
-      onObjectMoving(e.target, e.transform);
-    },
-    [onObjectMoving]
-  );
+  const buildCanvas = (width: number, height: number) => {
+    //static canvas , noselection active now, no interaction for now
+    console.log("build canvas: " +width +"x"+ height);
+    const cv = new fabric.Canvas("c", {
+      height: height,
+      width: width,
+      backgroundColor: "black",
+      selection: false,
+    });
+    //cv.selectionColor = 'rgba(0,255,0,0.3)';
+    //cv.selectionBorderColor = 'red';
+    //cv.selectionLineWidth = 5;
 
-  const objectMoved = useCallback(
-    (e: fabric.IEvent) => {
-      //gestire connections
-      onObjectMoved(e.target, e.transform);
-    },
-    [onObjectMoved]
-  );
+    cv.hoverCursor = "pointer";
+    //cv.selectionBorderColor ="#AF00AF";
+    //cv.selectionLineWidth = 2;
 
+    cv.on("mouse:down", (options) => {
+      props.onElementSelected(options.target);
+    });
+    return cv;
+  };
+
+
+  //TODO
+  // bisogna fare il render dopo l'effect in dipendenzadalle geometries e ge stire il resize quindi nell'effect, non serve il contxt e Render.tsx, usiamo solo funzione di render mettiamo qui 
+  //gli eventi  e le disptch di modi modifica
+  const onResize = debounce(() => {
+    const el: React.MutableRefObject<HTMLDivElement> | null = cRef?.current;
+    if (el) {
+      const d: HTMLDivElement = el;
+      console.log(
+        " Fabric canvas new size: " + d.clientWidth + "x" + d.clientHeight
+      );
+      canvas?.setDimensions({width:d.clientWidth, height: d.clientHeight});
+      canvas?.renderAll();
+      /*canvas?.clear();
+      canvas?.dispose();
+      while (d.firstChild) d.removeChild(d.firstChild);
+      const cv = buildCanvas(d.clientWidth, d.clientHeight);
+      setCanvas(cv);*/
+    }
+  }, 100);
   useEffect(() => {
     if (cRef.current != null && canvas == null) {
       const el: React.MutableRefObject<HTMLDivElement> | null = cRef?.current;
       if (el) {
         const d: HTMLDivElement = el;
         console.log(
-          "Build fabric cnvas: " + d.clientWidth + "x" + d.clientHeight
+          "Build fabric canvas: " + d.clientWidth + "x" + d.clientHeight
         );
 
-        //static canvas , noselection active now, no interaction for now
-        const cv = new fabric.Canvas("c", {
-          height: d.clientHeight,
-          width: d.clientWidth,
-          backgroundColor: "black",
-          selection: false,
-        });
-        //cv.selectionColor = 'rgba(0,255,0,0.3)';
-        //cv.selectionBorderColor = 'red';
-        //cv.selectionLineWidth = 5;
+        window.addEventListener("resize", onResize);
 
-        cv.hoverCursor = "pointer";
-        //cv.selectionBorderColor ="#AF00AF";
-        //cv.selectionLineWidth = 2;
-        cv.on("object:moving", objectMoving);
-        cv.on("object:moved", objectMoved);
-        cv.on("object:scaling", () => {});
-        cv.on("object:rotating", () => {});
-        cv.on("mouse:down", (options) => {
-          props.onElementSelected(options.target);
-        });
+        const cv = buildCanvas(d.clientWidth, d.clientHeight);
         setCanvas(cv);
       }
     }
 
     return function cleanup() {
+      window.removeEventListener("resize", onResize);
       console.warn("cleanup canvas");
       canvas?.dispose();
     };
@@ -94,11 +87,12 @@ const Canvas = (props: CanvasProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log("RENDER CANVAS", canvas?.getWidth(), canvas?.getHeight());
   return (
     <div className={"Fabric-canvas"} ref={cRef}>
       <canvas id="c">
         <CanvasContext.Provider value={canvas}>
-          <Render editing={editing} geometries={props.geometries} />
+          <Render editing={editing} />
         </CanvasContext.Provider>
       </canvas>
     </div>

@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {}, []);
 
-  const onEdit = useCallback((geoms: Array<any>) => {}, []);
+  //const onEdit = useCallback((geoms: Array<any>) => {}, []);
 
   const onClickEdit = useCallback(() => {
     dispatch({
@@ -27,35 +27,7 @@ function App() {
     else setSelectedTarget(null);
   }, []);
 
-  const onObjectMoving = useCallback((target: any, transform: any) => {
-    //console.log(target);
-    //console.log("Object: " + target.name);
-    //console.log("isMoving:" + target.isMoving);
-    //console.log("top " + target.top + "left " + target.left);
-    //console.log(transform);
-  }, []);
-
-  const onObjectMoved = useCallback(
-    (target: any, transform: any) => {
-      console.log("Object moved");
-      console.log("Object: " + target.name);
-      console.log("Object type: " + target.type);
-      //console.log("isMoving:" + target.isMoving);
-      console.log("top: " + target.top + ",left: " + target.left);
-      dispatch({
-        type: "SaveGeometries",
-        payload: [
-          {
-            name: target.name,
-            type: target.type,
-            top: target.top,
-            left: target.left,
-          },
-        ],
-      });
-    },
-    [dispatch]
-  );
+  
 
   return (
     <div className="App">
@@ -64,10 +36,6 @@ function App() {
         <div className="App-canvas">
           <Canvas
             editing={editing}
-            onObjectMoving={onObjectMoving}
-            onObjectMoved={onObjectMoved}
-            geometries={geometries}
-            onEdit={onEdit}
             onElementSelected={onElementSelected}
           />
 
