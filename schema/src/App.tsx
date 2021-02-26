@@ -36,7 +36,8 @@ function App() {
         <div className="App-canvas">
           <Canvas
             editing={editing}
-            onElementSelected={onElementSelected}
+            width={600}
+            height={400}
           />
 
           {selectedTarget != null ? (

@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import "./App.css";
+import { Counter } from "./Counter";
 import { expensiveAsync } from "./expensive";
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         <button className="App-button" onClick={onWorker}>
           GO
         </button>
-        <p>Count: {count != null ? count : ""}</p>
+        <Counter count={count} />
       </main>
     </div>
   );

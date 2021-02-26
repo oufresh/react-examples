@@ -37,7 +37,9 @@ export const Render = ({ editing }: { editing: boolean }) => {
   );
 
   const objectScaling = useCallback((e: fabric.IEvent) => {}, []);
+  const objectScaled = useCallback((e: fabric.IEvent) => {}, []);
   const objectRotating = useCallback((e: fabric.IEvent) => {}, []);
+  const objectRotated = useCallback((e: fabric.IEvent) => {}, []);
   const objectMoving = useCallback((e: fabric.IEvent) => {
     //gestire connections
     if (e.target) {
@@ -69,7 +71,9 @@ export const Render = ({ editing }: { editing: boolean }) => {
       c.off("object:moving", objectMoving);
       c.off("object:moved", objectMoved);
       c.off("object:scaling", objectScaling);
+      c.off("object:scaled", objectScaled);
       c.off("object:rotating", objectRotating);
+      c.off("object:rotated", objectRotated);
       c.clear();
     }
 
@@ -79,7 +83,9 @@ export const Render = ({ editing }: { editing: boolean }) => {
       canvas.on("object:moving", objectMoving);
       canvas.on("object:moved", objectMoved);
       canvas.on("object:scaling", objectScaling);
+      canvas.on("object:scaled", objectScaled);
       canvas.on("object:rotating", objectRotating);
+      canvas.on("object:rotated", objectRotated);
       render(canvas, geometries, editing);
     }
 
