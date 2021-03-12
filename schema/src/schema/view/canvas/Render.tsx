@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fabric } from "fabric";
 import { CanvasContext } from "./CanvasContext";
 import { render } from "./engine";
-import { SchemaStateType } from "../schema";
+import { SchemaStateType } from "../..";
 
 export const Render = ({ editing }: { editing: boolean }) => {
   const canvas = useContext(CanvasContext);

@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import Canvas from "./canvas/Canvas";
+//import Canvas from "./canvas/Canvas";
 import { ElementDetails } from "./details/Elememtdetails";
 import { useSelector, useDispatch } from "react-redux";
-import { SchemaStateType } from "./schema";
+import { SchemaStateType } from "./schema/module";
+import CanvasApp from "./schema/view/canvas/CanvasApp";
 
 function App() {
   const dispatch = useDispatch();
   const editing = useSelector((s: SchemaStateType) => s.editing);
-  const geometries = useSelector((s: SchemaStateType) => s.geometries);
+  //const geometries = useSelector((s: SchemaStateType) => s.geometries);
   const [selectedTarget, setSelectedTarget] = useState<any>(null);
 
   useEffect(() => {}, []);
@@ -34,11 +35,7 @@ function App() {
       <header className="App-header">Schema App</header>
       <main className="App-main">
         <div className="App-canvas">
-          <Canvas
-            editing={editing}
-            width={600}
-            height={400}
-          />
+          <CanvasApp />
 
           {selectedTarget != null ? (
             <ElementDetails

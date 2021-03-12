@@ -1,6 +1,6 @@
 import { fabric } from "fabric";
 import React, { useCallback, useEffect, useState } from "react";
-import debounce from "../commons/debounce";
+import debounce from "../../../commons/debounce";
 import { CanvasContext } from "./CanvasContext";
 import { Render } from "./Render";
 
