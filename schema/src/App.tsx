@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./App.css";
-//import Canvas from "./canvas/Canvas";
-import { ElementDetails } from "./details/Elememtdetails";
 import { useSelector, useDispatch } from "react-redux";
 import { SchemaStateType } from "./schema/module";
 import CanvasApp from "./schema/view/canvas/CanvasApp";
@@ -9,8 +7,6 @@ import CanvasApp from "./schema/view/canvas/CanvasApp";
 function App() {
   const dispatch = useDispatch();
   const editing = useSelector((s: SchemaStateType) => s.editing);
-  //const geometries = useSelector((s: SchemaStateType) => s.geometries);
-  const [selectedTarget, setSelectedTarget] = useState<any>(null);
 
   useEffect(() => {}, []);
 
@@ -22,12 +18,6 @@ function App() {
     });
   }, [dispatch]);
 
-  const onElementSelected = useCallback((target: any) => {
-    //console.warn(target);
-    if (target) setSelectedTarget(target);
-    else setSelectedTarget(null);
-  }, []);
-
   
 
   return (
@@ -36,13 +26,6 @@ function App() {
       <main className="App-main">
         <div className="App-canvas">
           <CanvasApp />
-
-          {selectedTarget != null ? (
-            <ElementDetails
-              name={selectedTarget.name}
-              info={selectedTarget.data}
-            />
-          ) : null}
         </div>
         <div className="App-bar">
           <label className="App-label">Schema tools</label>

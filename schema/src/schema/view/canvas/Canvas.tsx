@@ -1,8 +1,7 @@
 import { fabric } from "fabric";
-import React, { useCallback, useEffect, useState } from "react";
-import debounce from "../../../commons/debounce";
-import { CanvasContext } from "./CanvasContext";
+import React, {  useEffect, useRef, useState } from "react";
 import { Render } from "./Render";
+import { CanvasContext, buildCanvas,isCanvas, getCanvas, dispose, resize } from "./CanvasContext";
 
 // This is the context that components in need of canvas-access will use:
 
@@ -10,92 +9,55 @@ export type CanvasProps = {
   backgroundColor?: string | fabric.Pattern;
   width: number;
   height: number;
-  editing: boolean;
-  onObjectMoving?:(e: fabric.IEvent) => void; //TODO no event but new coordsth geom moving
-  onObjectMoved?:(e: fabric.IEvent) => void; //TODO no event but new coordsth geom moving
+  editing?: boolean;
+  onObjectMoving?: (e: fabric.IEvent) => void; //TODO no event but new coordsth geom moving
+  onObjectMoved?: (e: fabric.IEvent) => void; //TODO no event but new coordsth geom moving
   onObjectScaling?: (e: fabric.IEvent) => void; //TOD no event but new coordsth geom moving
   onObjectScaled?: (e: fabric.IEvent) => void; //TODO no event but new coordsth geom moving
   onObjectRotating?: (e: fabric.IEvent) => void; //TOD no event but new coordsth geom moving
   onObjectRotated?: (e: fabric.IEvent) => void; //TODO no event but new coordsth geom moving
-  onObjectSelected?: (targetNme: string | undefined, targetData: any) => void;
+  onObjectSelected?: (targetNme: string | undefined, targetData: any | undefined) => void;
 };
 
 const Canvas = (props: CanvasProps) => {
-  const { editing, backgroundColor, width, height, onObjectSelected} = props;
-  const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
-
-  const buildCanvas = () => {
-    //static canvas , noselection active now, no interaction for now
-    console.log("build canvas: " + width +"x"+ height);
-    const cv = new fabric.Canvas("c", {
-      height: height,
-      width: width,
-      backgroundColor: backgroundColor ? backgroundColor: "black",
-      selection: false, //TODO no MULTI SELECTION FOR NOW
-    });
-    //cv.selectionColor = 'rgba(0,255,0,0.3)';
-    //cv.selectionBorderColor = 'red';
-    //cv.selectionLineWidth = 5;
-
-    cv.hoverCursor = "pointer";
-    //cv.selectionBorderColor ="#AF00AF";
-    //cv.selectionLineWidth = 2;
-
-    return cv;
-  };
-
-  const objSelected = useCallback((event: fabric.IEvent) =>{
-    if(onObjectSelected) {
-      if(event.target) {
-        onObjectSelected(event.target.name, event.target.data);
-      }
-    }
-  }, []);
-
-
-  //TODO
-  // bisogna fare il render dopo l'effect in dipendenzadalle geometries e ge stire il resize quindi nell'effect, non serve il contxt e Render.tsx, usiamo solo funzione di render mettiamo qui 
-  //gli eventi  e le disptch di modi modifica
-  const onResize = debounce(() => {
-      console.log(
-        " Fabric canvas new size: " + width + "x" + height
-      );
-      canvas?.setDimensions({width:width, height: height});
-      canvas?.renderAll();
-      /*canvas?.clear();
-      canvas?.dispose();
-      while (d.firstChild) d.removeChild(d.firstChild);
-      const cv = buildCanvas(d.clientWidth, d.clientHeight);
-      setCanvas(cv);*/
-  }, 100);
+  const {width, height, onObjectSelected } = props;
+  const canvasEl = useRef<HTMLCanvasElement>(null);
+  const [ built, setBuilt] = useState(false);
 
   useEffect(() => {
-    if (canvas == null) {
-        console.log(
-          "Build fabric canvas: " + width + "x" + height
-        );
-        const cv = buildCanvas();
-        cv.on("mouse:down", objSelected);
-        setCanvas(cv);
+    if (!isCanvas() && !built) {
+      buildCanvas(canvasEl.current, width, height, onObjectSelected);
+      setBuilt(true);
     }
 
     return function cleanup() {
       console.warn("cleanup canvas");
-      canvas?.off("mouse:down", objSelected);
-      canvas?.dispose();
+      dispose();
+      setBuilt(false);
     };
     //only on umount cleanup, disable the warning
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log("RENDER CANVAS", canvas?.getWidth(), canvas?.getHeight());
+  useEffect(() => {
+    if (isCanvas() && built) {
+      resize(width, height);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width, height]);
+  console.log("RENDER CANVAS", width, height);
   return (
-      <canvas id="c">
-        <CanvasContext.Provider value={canvas}>
-          <Render editing={editing} />
-        </CanvasContext.Provider>
-      </canvas>
+    <canvas id="c" ref={canvasEl}>
+      <CanvasContext.Provider value={getCanvas()} >
+        {built ? <Render editing={false} /> : null}
+      </CanvasContext.Provider>
+    </canvas>
   );
 };
 
-export default Canvas;
+export default React.memo(Canvas, (prevProps, nextProps) => {
+  if (
+    prevProps.width !== nextProps.width || prevProps.height !== nextProps.height
+  ) return false;
+  else return true;
+
+});

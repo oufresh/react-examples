@@ -34,6 +34,7 @@ function useWindowSize(ref: React.MutableRefObject<null>) {
 
     // Call handler right away so state gets updated with initial window size
     calcResize();
+    //debugger;
     console.log("Calculated size on mount:", windowSize);
 
     // Remove event listener on cleanup
