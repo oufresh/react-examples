@@ -9,3 +9,13 @@ export type ToggleEditing = {
     type: "ToggleEditing",
     payload: boolean
 };
+
+export type SelectObjects = {
+    type: "SelectObjects",
+    payload: Array<any>
+};
+
+export type DeSelectObjects = {
+    type: "DeSelectObjects",
+    payload: Array<any>
+};

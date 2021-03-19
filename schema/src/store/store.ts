@@ -6,5 +6,6 @@ import initSchema from "./initSchema.json";
 export const store = createStore(reducer, {
     editing: false,
     geometries: initSchema,
-    editingGeometries: []
+    editingGeometries: [],
+    selected:[]
 }, applyMiddleware(logger));

@@ -1,27 +1,28 @@
 import { fabric } from "fabric";
 import { createContext } from "react";
 
-// Here are the things that can live in the fabric context.
+export type SelectionEvent = {
+  e: MouseEvent;
+  target?: fabric.Object;
+  selected: Array<fabric.Object>;
+} 
+
+export type DeSelectionEvent = {
+  e: MouseEvent;
+  deselected: Array<fabric.Object>;
+} 
+export type OnSelectionCreated = (event: SelectionEvent) => void;
+export type OnSelectionCleared = (event: DeSelectionEvent) => void;
 export interface TCanvas {
   // The canvas
   canvas: fabric.Canvas | fabric.StaticCanvas | null;
   width: number;
   height: number;
-  onObjectSelected?: (targetNme: string | undefined, targetData: any | undefined) => void;
+  onSelectionCreated?: OnSelectionCreated;
+  onSelectionCleared?: OnSelectionCleared;
 }
 
 let Canvas: TCanvas | null = null;
-
-const onMouseDown = (event: fabric.IEvent) => {
-  if (Canvas)
-    if (Canvas.onObjectSelected) {
-      if (event.target)
-        Canvas.onObjectSelected(event.target.name, event.target.data);
-        else {
-            Canvas.onObjectSelected(undefined, undefined);
-        }
-    }
-};
 
 // This is the context that components in need of canvas-access will use:
 export const CanvasContext = createContext<
@@ -31,29 +32,31 @@ export const buildCanvas = (
   canvasEl: HTMLCanvasElement | null,
   width: number,
   height: number,
-  onObjectSelected?: (targetNme: string | undefined, targetData: any) => void
+  onSelectionCreated?: OnSelectionCreated,
+  onSelectionCleared?: OnSelectionCleared
 ) => {
-  //static canvas , noselection active now, no interaction for now
   console.log("build canvas: " + width + "x" + height);
   //CanvasContext.
   const fcv = new fabric.Canvas(canvasEl, {
     height: height,
     width: width,
     backgroundColor: /*backgroundColor ? backgroundColor :*/ "black",
-    selection: false, //TODO no MULTI SELECTION FOR NOW
+    selection: true, //TODO no MULTI SELECTION FOR NOW
   });
-  //cv.selectionColor = 'rgba(0,255,0,0.3)';
-  //cv.selectionBorderColor = 'red';
-  //cv.selectionLineWidth = 5;
+  fcv.selectionColor = 'rgba(255,0,0,0.3)';
+  fcv.selectionBorderColor = 'red';
+  fcv.selectionLineWidth = 5;
 
   fcv.hoverCursor = "pointer";
   //cv.selectionBorderColor ="#AF00AF";
   //cv.selectionLineWidth = 2;
-  if (onObjectSelected) {
-    fcv.on("mouse:down", onMouseDown);
+  if (onSelectionCreated) {
+    fcv.on("selection:created", (onSelectionCreated) as ()=> void);
+    if(onSelectionCleared)
+    fcv.on("selection:cleared", onSelectionCleared as ()=> void);
   }
 
-  Canvas = {canvas:fcv, width: width, height:height, onObjectSelected: onObjectSelected};
+  Canvas = {canvas:fcv, width: width, height:height, onSelectionCreated: onSelectionCreated, onSelectionCleared: onSelectionCleared};
 };
 
 export const isCanvas = () => Canvas !== null;
@@ -71,6 +74,7 @@ export const resize = (width: number, height: number) => {
 };
 
 export const dispose = () => {
-  Canvas?.canvas?.off("mouse:down", onMouseDown);
+  Canvas?.canvas?.off("selection:created", Canvas.onSelectionCreated  as ()=> void);
+  Canvas?.canvas?.off("selection:cleared", Canvas.onSelectionCleared  as ()=> void);
   Canvas?.canvas?.dispose();
 };

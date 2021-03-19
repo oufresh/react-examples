@@ -86,6 +86,7 @@ export const Render = ({ editing }: { editing: boolean }) => {
       canvas.on("object:scaled", objectScaled);
       canvas.on("object:rotating", objectRotating);
       canvas.on("object:rotated", objectRotated);
+
       render(canvas, geometries, editing);
       console.log("render geoms...");
     }
