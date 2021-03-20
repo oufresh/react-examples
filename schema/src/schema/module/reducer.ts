@@ -9,10 +9,17 @@ const reducer = (
     case "SaveGeometries":
       const ns = [];
       for (const elem of state.geometries) {
-        ns.push(elem);
+        const found = action.payload.geometries.find(g => g.name === elem.name);
+        if (found){
+          elem.top =found.top;
+          elem.left = found.left;
+            ns.push(elem);
+          }
+          else
+          ns.push(elem);
       }
       return {
-        geometries: state.geometries,
+        geometries: ns,
         editing: state.editing,
         editingGeometries: action.payload.geometries,
         selected: state.selected

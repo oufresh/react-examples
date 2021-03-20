@@ -9,7 +9,7 @@ export const Render = ({ editing }: { editing: boolean }) => {
   const canvas = useContext(CanvasContext);
   const dispatch = useDispatch();
   const geometries = useSelector((s: SchemaStateType) => s.geometries);
- // console.log(geometries);
+  // console.log(geometries);
 
   const objectMoved = useCallback(
     (e: fabric.IEvent) => {
@@ -22,14 +22,16 @@ export const Render = ({ editing }: { editing: boolean }) => {
         console.log("top: " + target.top + ",left: " + target.left);
         dispatch({
           type: "SaveGeometries",
-          payload: [
-            {
-              name: target.name,
-              type: target.type,
-              top: target.top,
-              left: target.left,
-            },
-          ],
+          payload: {
+            geometries: [
+              {
+                name: target.name,
+                type: target.type,
+                top: target.top,
+                left: target.left,
+              },
+            ],
+          },
         });
       }
     },
