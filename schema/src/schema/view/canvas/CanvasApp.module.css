@@ -1,0 +1,14 @@
+.appCanvas {
+  flex: 1;
+  /*border: 1px solid gray;*/
+  position: relative;
+  background-color: black;
+}
+
+.fabricCanvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}

@@ -4,6 +4,7 @@ import { SchemaStateType } from "../..";
 import useWindowSize from "../../../commons/windowSize";
 import { ElementDetails } from "../../../details";
 import Canvas from "./Canvas";
+import styles from "./CanvasApp.module.css";
 
 export const CanvasApp = () => {
   const cRef = useRef(null);
@@ -11,7 +12,8 @@ export const CanvasApp = () => {
   const selectedTarget = useSelector((s: SchemaStateType) => s.selected);
 
   return (
-    <div className={"Fabric-canvas"} ref={cRef}>
+    <div className={styles.appCanvas}>
+    <div className={styles.fabricCanvas} ref={cRef}>
       {size.width !== undefined && size.height !== undefined ? (
         <Canvas
           width={size.width !== undefined ? size.width : 200}
@@ -24,6 +26,7 @@ export const CanvasApp = () => {
               info={selectedTarget[0].data}
             />
           ) : null}
+    </div>
     </div>
   );
 };
