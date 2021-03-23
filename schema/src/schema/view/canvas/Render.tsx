@@ -13,13 +13,19 @@ export const Render = ({ editing }: { editing: boolean }) => {
 
   const objectMoved = useCallback(
     (e: fabric.IEvent) => {
+      debugger;
       if (e.target) {
         const target = e.target as fabric.Object;
         console.log("Object moved");
         console.log("Object: " + target.name);
         console.log("Object type: " + target.type);
         //console.log("isMoving:" + target.isMoving);
+        const t = e.transform as any;
+        console.log("Y diff: " + ((e.target.top as number) - t.original.top));
+        console.log("X diff: " + ((e.target.left as number) - t.original.left));
         console.log("top: " + target.top + ",left: " + target.left);
+        //se multiple iltarget è la selezione quindi posso prendere da li i dati di drag in termini di variazione
+        //in _objects ci dovrebbero essere gli oggettidevo prendere da li i nomi e id
         dispatch({
           type: "SaveGeometries",
           payload: {
