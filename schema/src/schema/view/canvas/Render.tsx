@@ -13,30 +13,48 @@ export const Render = ({ editing }: { editing: boolean }) => {
 
   const objectMoved = useCallback(
     (e: fabric.IEvent) => {
-      debugger;
+      //debugger;
       if (e.target) {
-        const target = e.target as fabric.Object;
+        const target = e.target as fabric.Object | any ;
         console.log("Object moved");
         console.log("Object: " + target.name);
         console.log("Object type: " + target.type);
         //console.log("isMoving:" + target.isMoving);
         const t = e.transform as any;
-        console.log("Y diff: " + ((e.target.top as number) - t.original.top));
-        console.log("X diff: " + ((e.target.left as number) - t.original.left));
+        const dy= ((e.target.top as number) - t.original.top)
+        const dx = ((e.target.left as number) - t.original.left);
+        console.log("Y diff: " + dy);
+        console.log("X diff: " + dx);
         console.log("top: " + target.top + ",left: " + target.left);
         //se multiple iltarget è la selezione quindi posso prendere da li i dati di drag in termini di variazione
-        //in _objects ci dovrebbero essere gli oggettidevo prendere da li i nomi e id
+        //in _objects ci dovrebbero essere gli oggettidevo prendere da li i nomi e id quando sono multipli bisogna fare la differenza
+        //delle coords
+
+        //if(target._objects && target._objects.length > 1) {
+          
+        //}
+        const gs= [{
+          name: target.name,
+          type: target.type,
+          dx, dy
+        }];
+
+        if (target.data) {
+          if (target.data.connections && target.data.connections.length > 0) {
+            const c = target.data.connections[0];
+            const ancored = geometries.find(g => g.name === c.name);
+            console.log(ancored);
+            gs.push({
+              name: ancored.name,
+              type: ancored.type,
+              dx,dy
+            });
+        }
+      }
         dispatch({
           type: "SaveGeometries",
           payload: {
-            geometries: [
-              {
-                name: target.name,
-                type: target.type,
-                top: target.top,
-                left: target.left,
-              },
-            ],
+            geometries: gs,
           },
         });
       }

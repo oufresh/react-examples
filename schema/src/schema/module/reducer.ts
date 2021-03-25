@@ -11,8 +11,11 @@ const reducer = (
       for (const elem of state.geometries) {
         const found = action.payload.geometries.find(g => g.name === elem.name);
         if (found){
-          elem.top =found.top;
-          elem.left = found.left;
+          if(found.type ==="line"){
+            elem.coords = [elem.coords[0]+found.dx, elem.coords[1]+found.dy, elem.coords[2], elem.coords[3]]
+          }
+          elem.top +=found.dy;
+          elem.left += found.dx;
             ns.push(elem);
           }
           else

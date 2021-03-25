@@ -41,11 +41,11 @@ export const buildCanvas = (
     height: height,
     width: width,
     backgroundColor: /*backgroundColor ? backgroundColor :*/ "black",
-    selection: true, //TODO no MULTI SELECTION FOR NOW
+    selection: false, //TODO no MULTI SELECTION FOR NOW
   });
-  fcv.selectionColor = 'rgba(255,0,0,0.3)';
-  fcv.selectionBorderColor = 'red';
-  fcv.selectionLineWidth = 5;
+  //fcv.selectionColor = 'rgba(255,0,0,0.3)';
+  //fcv.selectionBorderColor = 'red';
+  //fcv.selectionLineWidth = 5;
 
   fcv.hoverCursor = "pointer";
   //cv.selectionBorderColor ="#AF00AF";
