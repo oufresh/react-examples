@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fabric } from "fabric";
 import { CanvasContext } from "./CanvasContext";
-import { render } from "./engine";
+import { render, getObject, drageEnd} from "./engine";
 import { SchemaStateType } from "../..";
 
 export const Render = ({ editing }: { editing: boolean }) => {
@@ -13,7 +13,6 @@ export const Render = ({ editing }: { editing: boolean }) => {
 
   const objectMoved = useCallback(
     (e: fabric.IEvent) => {
-      //debugger;
       if (e.target) {
         const target = e.target as fabric.Object | any ;
         console.log("Object moved");
@@ -25,7 +24,7 @@ export const Render = ({ editing }: { editing: boolean }) => {
         const dx = ((e.target.left as number) - t.original.left);
         console.log("Y diff: " + dy);
         console.log("X diff: " + dx);
-        console.log("top: " + target.top + ",left: " + target.left);
+        //console.log("top: " + target.top + ",left: " + target.left);
         //se multiple iltarget è la selezione quindi posso prendere da li i dati di drag in termini di variazione
         //in _objects ci dovrebbero essere gli oggettidevo prendere da li i nomi e id quando sono multipli bisogna fare la differenza
         //delle coords
@@ -33,13 +32,13 @@ export const Render = ({ editing }: { editing: boolean }) => {
         //if(target._objects && target._objects.length > 1) {
           
         //}
-        const gs= [{
-          name: target.name,
+        const gs= drageEnd(e, geometries);//[{
+          /*name: target.name,
           type: target.type,
           dx, dy
-        }];
+        }];*/
 
-        if (target.data) {
+        /*if (target.data) {
           if (target.data.connections && target.data.connections.length > 0) {
             const c = target.data.connections[0];
             const ancored = geometries.find(g => g.name === c.name);
@@ -50,7 +49,7 @@ export const Render = ({ editing }: { editing: boolean }) => {
               dx,dy
             });
         }
-      }
+      }*/
         dispatch({
           type: "SaveGeometries",
           payload: {
@@ -72,17 +71,33 @@ export const Render = ({ editing }: { editing: boolean }) => {
       //console.log(e.target.aCoords);
       //console.log(e.target.oCoords);
       //console.log(e.target.top - e.target.t);
-      const t = e.transform as any;
+      const target = e.target as any;
+      const transform = e.transform as any;
 
       //search for delta moving
-      console.log(t.action);
-      console.log("transform originX: " + e.transform?.originX);
-      console.log("transform originY: " + e.transform?.originY);
-      //e.
-      console.log(t);
-      //console.log("target.top: " +e.target.top + ", t.lastY:" + t.lastY)
-      console.log("Y diff: " + ((e.target.top as number) - t.original.top));
-      console.log("X diff: " + ((e.target.left as number) - t.original.left));
+      //console.log(target.action);
+      //console.log(t);
+      const dy= ((e.target.top as number) - transform.original.top)
+      const dx = ((e.target.left as number) - transform.original.left);
+        //console.log("Y diff: " + dy);
+        //console.log("X diff: " + dx);
+        if (target.data) {
+          if (target.data.connections && target.data.connections.length > 0) {
+            const c = target.data.connections[0];
+            const ancored = geometries.find(g => g.name === c.name);
+            //console.log(ancored);
+            if(ancored.type ==="line"){
+              const coords = [ancored.coords[0]+ dx, ancored.coords[1]+dy, ancored.coords[2], ancored.coords[3]];
+              //console.log(coords);
+//da trovare nel canvas..
+              const ancoredCanvas = getObject(canvas, ancored.name, "line");
+              if(ancoredCanvas)
+              console.log(coords);
+              //ancoredCanvas.set({'x1': coords[0], 'y1': coords[1]});
+              //canvas?.renderAll();
+            }
+        }
+      }
       //console.log(t)
 
       /*

@@ -21,8 +21,8 @@ export const render = (
         obj = null;
         break;
     }
-    console.log(obj);
-    console.log(obj?.type);
+    //console.log(obj);
+    //console.log(obj?.type);
     if (editing === true) {
       //editing mode
       obj?.set("lockMovementX", false);
