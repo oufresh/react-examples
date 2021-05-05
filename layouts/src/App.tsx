@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Header } from "./Header";
-import appStyles from "./App.module.css";
+import "./App.css";
 
 export default function App() {
   return (
-    <div className={appStyles.App}>
+    <div className="App">
       <Header />
-      <main className={appStyles.Main}></main>
+      <main className="Main"></main>
     </div>
   );
 }
